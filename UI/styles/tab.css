@@ -73,6 +73,7 @@
   border-bottom: 1px solid silver;
   width: 50%;
   margin-left: 20px;
+  letter-spacing: 1px;
 }
 
 .h-head, .a-head{
@@ -80,6 +81,11 @@
   width: 90%;
   padding-bottom: 5px;
   margin-left: 20px;
+  letter-spacing: 1px;
+}
+
+.h-head p{
+  margin-top: 5px;
 }
 
 #profile-details {
@@ -146,7 +152,11 @@ hr{
 }
 
 #loan-history{
-
+  width: 90%;
+  margin: 20px;
+  background: white;
+  border-radius: 2px;
+  color: rgb(104, 103, 103);
 }
 
 .icon{
