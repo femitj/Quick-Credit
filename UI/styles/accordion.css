@@ -1,0 +1,47 @@
+
+/* Acordion */
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  cursor: pointer;
+  padding: 5px;
+  width: 90%;
+  text-align: left;
+  outline: none;
+  transition: 0.5s;
+  margin: 5px 0px 0px 20px;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  height: 50px;
+  font-size:  1.3rem;
+  font-family: inherit;
+  background: transparent;
+  border-bottom: 0.5px solid silver;
+  color: black
+}
+
+.acc-active, .accordion:hover {
+  background-color: rgb(104, 103, 103);
+  color: white;
+  border-bottom: none;
+}
+
+
+
+
+/* SECTIONS */
+
+@media(max-width:480px){
+  .accordion{
+      font-size: 1rem;
+      height: 30px;
+      padding: 0 10px;
+      font-weight: 600
+  }
+
+  
+
+}
+

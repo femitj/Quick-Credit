@@ -88,6 +88,13 @@
   margin-top: 5px;
 }
 
+.c-head{
+  width: 90%;
+  padding-bottom: 5px;
+  margin-left: 20px;
+  letter-spacing: 1px;
+}
+
 #profile-details {
   width: 90%;
   height: 200px;
