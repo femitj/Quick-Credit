@@ -8,6 +8,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
   <link rel="stylesheet" type="text/css" media="screen" href="../styles/user.css">
   <link rel="stylesheet" type="text/css" media="screen" href="../styles/tab.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="../styles/table.css">
   <link rel='stylesheet' type='text/css' media='screen' href='../styles/header-button.css'>
 </head>
 
@@ -102,9 +103,49 @@
     <div id="History" class="tabcontent">
       <div class='h-head'>
         <h3>Transactions</h3>
+        <p>View loan repayment history</p>
       </div>
       <div id='loan-history'>
-        <p>Tokyo is the capital of Japan.</p>
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>Amount</th>
+              <th>Tenor(months)</th>
+              <th>PaymentInstallment</th>
+              <th>Repaid</th>
+              <th>Balance</th>
+              <th>Interest</th>  
+            </tr>
+          </thead>
+          <tbody id='office-list'>
+            <tr>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>true</td>
+              <td>0</td>
+              <td>10000</td>
+            </tr>
+    
+            <tr>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>true</td>
+              <td>0</td>
+              <td>10000</td>
+            </tr>
+    
+            <tr>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>true</td>
+              <td>0</td>
+              <td>10000</td>
+            </tr>
+          </tbody>    
+        </table>
       </div>
     </div>
   
