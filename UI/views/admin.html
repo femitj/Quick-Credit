@@ -43,8 +43,8 @@
     <div class="tab">
       
       <button class="tablinks" name='Clients' id="defaultOpen"><span class="icon"><i class="fas fa-user-edit"></i></span><span class='text'>Clients</span></button>
-      <button class="tablinks" name='Loans'><span class='icon'><i class="fa fa-credit-card" aria-hidden="true"></i></span><span class='text'>Transactions</span></button>
-      <button class="tablinks" name='Post'><span class='icon'><i class="fas fa-user"></i></i></span><span class='text'>Profile</span></button>
+      <button class="tablinks" name='Loans'><span class='icon'><i class="fa fa-credit-card" aria-hidden="true"></i></span><span class='text'>Loans</span></button>
+      <button class="tablinks" name='Post'><span class='icon'><i class="fas fa-user"></i></i></span><span class='text'>Post</span></button>
     </div>
     
   
@@ -54,7 +54,7 @@
       </div>
 
       <button class="accordion">Mark a client as verified</button>
-      <div id='loan-history'>
+      <div id='acct-list'>
         <table class='table'>
           <thead>
             <tr>
@@ -99,11 +99,70 @@
     </div>
 
     <div id="Loans" class="tabcontent">
-      <div class='p-head'>
-        <h3>Personal Details</h3>
+      <div class='c-head'>
+        <h3>View Loans</h3>
       </div>
-      <div id='profile-details'>  
-        <p>London is the capital city of England.</p>
+
+      <button class="accordion">View all loans</button>
+      <div id='loan-history'>  
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Amount</th>
+              <th>Tenor(months)</th>
+              <th>PaymentInstallment</th>
+              <th>Repaid</th>
+              <th>Balance</th>
+              <th>Interest</th>
+              <th>Status</th>
+              <th></th>
+              <th></th>  
+            </tr>
+          </thead>
+          <tbody id='office-list'>
+            <tr>
+              <td>bola@gmail.com</td>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>true</td>
+              <td>0</td>
+              <td>10000</td>
+            </tr>
+    
+            <tr>
+              <td>ted@gmail.com</td>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>true</td>
+              <td>0</td>
+              <td>10000</td>
+            </tr>
+    
+            <tr>
+              <td>bola@gmail.com</td>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>true</td>
+              <td>0</td>
+              <td>10000</td>
+            </tr>
+
+            <tr>
+              <td>dele@gmail.com</td>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>true</td>
+              <td>0</td>
+              <td>10000</td>
+            </tr>
+          </tbody>    
+        </table>
+
       </div>
     </div>
   

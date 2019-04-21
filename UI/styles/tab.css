@@ -158,7 +158,7 @@ hr{
   border: 0.5px solid silver;
 }
 
-#loan-history{
+#acct-list, #loan-history{
   width: 90%;
   margin: 20px;
   background: white;
