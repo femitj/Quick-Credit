@@ -10,9 +10,40 @@ body{
 }
 
 .register-user-btn{
-  background: linear-gradient( to right bottom, rgba(85, 223, 85, 0.8), rgba(8, 196, 33, 0.8));
-  color: white;
+  background: transparent;
+	color: rgb(104, 103, 103);
   transition: 2s;
+}
+
+.register-user-btn:hover{
+	background: linear-gradient( to right bottom, rgba(85, 223, 85, 0.8), rgba(8, 196, 33, 0.8));
+	color: white;
+}
+
+.loan-appv-btn button{
+	background: transparent;
+	cursor: pointer;
+	font-size: 18px;
+	border: none;
+  color: rgb(104, 103, 103);
+  transition: 2s;
+}
+
+.loan-appv-btn button:hover{
+	color: rgba(85, 223, 85, 0.8);
+}
+
+.loan-rejct-btn button{
+	text-decoration: none;
+	cursor: pointer;
+	background: transparent;
+	border: none;
+	font-size: 18px;
+	color: rgb(104, 103, 103);
+}
+
+.loan-rejct-btn button:hover{
+	color: red;
 }
 
 @media 
@@ -22,11 +53,19 @@ only screen and (max-width: 760px),
 /*
 Label the data
 */
-td:nth-of-type(1):before { content: "Email"; }
-td:nth-of-type(2):before { content: "Firstname"; }
-td:nth-of-type(3):before { content: "Lastname"; }
-td:nth-of-type(4):before { content: "Address"; }
-td:nth-of-type(5):before { content: "Status"; }
+#acct-list td:nth-of-type(1):before { content: "Email"; }
+#acct-list td:nth-of-type(2):before { content: "Firstname"; }
+#acct-list td:nth-of-type(3):before { content: "Lastname"; }
+#acct-list td:nth-of-type(4):before { content: "Address"; }
+#acct-list td:nth-of-type(5):before { content: "Status"; }
 
+#loan-history td:nth-of-type(1):before { content: "User"; }
+#loan-history td:nth-of-type(2):before { content: "Amount"; }
+#loan-history td:nth-of-type(3):before { content: "Tenor"; }
+#loan-history td:nth-of-type(4):before { content: "PaymentInstallment"; }
+#loan-history td:nth-of-type(5):before { content: "Repaid"; }
+#loan-history td:nth-of-type(6):before { content: "Balance"; }
+#loan-history td:nth-of-type(7):before { content: "Interest"; }
+#loan-history td:nth-of-type(8):before { content: "Status"; }
 
 }
