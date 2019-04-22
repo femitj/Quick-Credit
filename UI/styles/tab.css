@@ -153,17 +153,21 @@ input{
 }
 
 hr{
-  width: 95%;
+  width: 90%;
   margin-left: 10px;
   border: 0.5px solid silver;
 }
 
-#acct-list, .loan-history, #all-loans{
+#acct-list, .loan-history, .all-specific-loan{
   width: 90%;
   margin: 20px;
   background: white;
   border-radius: 2px;
   color: rgb(104, 103, 103);
+}
+
+.specific-form{
+  border: 0.5px solid silver;
 }
 
 .icon{

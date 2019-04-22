@@ -106,7 +106,7 @@
 
       <!--View All loans-->
       <button class="accordion">View all loans</button>
-      <div id='all-loans'>  
+      <div id='all-loans' class='all-specific-loan'>  
         <table class='table'>
           <thead>
             <tr>
@@ -315,6 +315,56 @@
 
       </div>
 
+      <button class="accordion">View specific loans</button>
+      <div id='specific-loan' class='all-specific-loan'>
+        <form enctype="multipart/form-data" class='specific-form' name="specificLoan">
+          <div class='form-div'>
+            <div class='input-div'>
+            <label for='title'>Loan Id</label>
+              <input type='number' id='loan-id'  name='loan-id' required>
+            </div>
+
+              <div class='input-div'>
+                <label></label>
+                <button>ENTER</button>
+              </div>
+          </div>
+          </form>
+
+          <table class='table'>
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>User</th>
+                <th>Amount</th>
+                <th>Tenor(months)</th>
+                <th>PaymentInstallment</th>
+                <th>Repaid</th>
+                <th>Balance</th>
+                <th>Interest</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id='office-list'>
+              <tr>
+                <td>1</td>
+                <td>bola@gmail.com</td>
+                <td>100000</td>
+                <td>5</td>
+                <td>22000</td>
+                <td>true</td>
+                <td>0</td>
+                <td>10000</td>
+                <td>approved</td>
+              </tr>
+            </tbody>
+          </table>
+    
+            <hr>
+
+      </div>  
+      <br>
+      <br>
     </div>
 
     <div id="Post" class="tabcontent">
