@@ -53,6 +53,7 @@
         <h3>Clients</h3>
       </div>
 
+      <!--Mark a client|user as verified-->
       <button class="accordion">Mark a client as verified</button>
       <div id='acct-list'>
         <table class='table'>
@@ -103,11 +104,13 @@
         <h3>View Loans</h3>
       </div>
 
+      <!--View All loans-->
       <button class="accordion">View all loans</button>
-      <div id='loan-history'>  
+      <div id='all-loans'>  
         <table class='table'>
           <thead>
             <tr>
+              <th>Id</th>
               <th>User</th>
               <th>Amount</th>
               <th>Tenor(months)</th>
@@ -122,6 +125,7 @@
           </thead>
           <tbody id='office-list'>
             <tr>
+              <td>1</td>
               <td>bola@gmail.com</td>
               <td>100000</td>
               <td>5</td>
@@ -135,6 +139,7 @@
             </tr>
     
             <tr>
+              <td>2</td>
               <td>ted@gmail.com</td>
               <td>100000</td>
               <td>5</td>
@@ -148,6 +153,7 @@
             </tr>
     
             <tr>
+              <td>3</td>
               <td>bola@gmail.com</td>
               <td>100000</td>
               <td>5</td>
@@ -161,6 +167,7 @@
             </tr>
 
             <tr>
+              <td>4</td>
               <td>dele@gmail.com</td>
               <td>100000</td>
               <td>5</td>
@@ -177,8 +184,75 @@
 
       </div>
 
-      <button class="accordion">View all current loans</button>
-      <div id='loan-history'>  
+
+      <!--View All current loans-->
+      <button class="accordion">View all current loans (not fully repaid)</button>
+      <div id='current-loans' class='loan-history'>  
+        <table class='table'>
+          <thead>
+            <tr>
+              <th>User</th>
+              <th>Amount</th>
+              <th>Tenor(months)</th>
+              <th>PaymentInstallment</th>
+              <th>Repaid</th>
+              <th>Balance</th>
+              <th>Interest</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id='office-list'>
+            <tr>
+              <td>bola@gmail.com</td>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>false</td>
+              <td>0</td>
+              <td>10000</td>
+              <td>approved</td>
+            </tr>
+    
+            <tr>
+              <td>ted@gmail.com</td>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>false</td>
+              <td>0</td>
+              <td>10000</td>
+              <td>approved</td>
+            </tr>
+    
+            <tr>
+              <td>bola@gmail.com</td>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>false</td>
+              <td>0</td>
+              <td>10000</td>
+              <td>approved</td>
+            </tr>
+
+            <tr>
+              <td>dele@gmail.com</td>
+              <td>100000</td>
+              <td>5</td>
+              <td>22000</td>
+              <td>false</td>
+              <td>0</td>
+              <td>10000</td>
+              <td>approved</td>
+            </tr>
+          </tbody>    
+        </table>
+
+      </div>
+
+      <!--View All repaid loans-->
+      <button class="accordion">View all repaid loans</button>
+      <div id='repaid-loans' class='loan-history'>  
         <table class='table'>
           <thead>
             <tr>
