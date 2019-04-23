@@ -44,7 +44,7 @@
       
       <button class="tablinks" name='Clients' id="defaultOpen"><span class="icon"><i class="fas fa-user-edit"></i></span><span class='text'>Clients</span></button>
       <button class="tablinks" name='Loans'><span class='icon'><i class="fa fa-credit-card" aria-hidden="true"></i></span><span class='text'>Loans</span></button>
-      <button class="tablinks" name='Post'><span class='icon'><i class="fas fa-user"></i></i></span><span class='text'>Post</span></button>
+      <button class="tablinks" name='Post'><span class='icon'><i class="fas fa-pen-fancy"></i></span><span class='text'>Post</span></button>
     </div>
     
   
@@ -186,7 +186,7 @@
 
 
       <!--View All current loans-->
-      <button class="accordion">View all current loans (not fully repaid)</button>
+      <button class="accordion">View all current loans</button>
       <div id='current-loans' class='loan-history'>  
         <table class='table'>
           <thead>
@@ -369,8 +369,50 @@
 
     <div id="Post" class="tabcontent">
       <div class='a-head'>
-        <h3>Apply For Loans</h3>
+        <h3>Create a loan repayment record</h3>
       </div>
+
+      <form enctype="multipart/form-data" id='repaymentForm' name="repaymentForm">
+        <div class='form-div'>
+          <div class='input-div'>
+          <label for='title'>Loan Id</label>
+            <input type='number' id='loanId'  name='loanId' required>
+          </div>
+        </div>
+        <div class='form-div'>
+          <div class='input-div'>
+          <label for='title'>Amount</label>
+            <input type='number' id='amount'  name='amount' required>
+          </div>
+        </div>
+        <div class='form-div'>
+          <div class='input-div'>
+          <label for='title'>Monthly Installment</label>
+            <input type='number' id='monthlyInstallment'  name='monthlyInstallment' required>
+          </div>
+        </div>
+        <div class='form-div'>
+          <div class='input-div'>
+          <label for='title'>Paid Amount</label>
+            <input type='number' id='paidAmount'  name='paidAmount' required>
+          </div>
+        </div>
+        <div class='form-div'>
+          <div class='input-div'>
+          <label for='title'>Balance</label>
+            <input type='number' id='balance'  name='balance' required>
+          </div>
+        </div>
+        <hr>
+        <br>
+    
+        <div id='submitButton' class='form-div'>
+          <div class='input-div'>
+            <label></label>
+            <button>POST</button>
+          </div>
+        </div>
+      </form>
 
     </div>
   

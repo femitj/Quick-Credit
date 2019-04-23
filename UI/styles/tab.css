@@ -106,7 +106,7 @@
   border-radius: 5px;
 }
 
-#apply-loan{
+#apply-loan, #repaymentForm{
   width: 90%;
   margin: 20px;
   background: white;
