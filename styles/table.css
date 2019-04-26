@@ -1,0 +1,118 @@
+
+table {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+  overflow-y: scroll;
+  border: 0.5px solid silver;
+}
+
+td{
+  text-align: center;
+  padding: 15px;
+}
+
+tbody{
+  background: white;
+  border-radius: 10px;
+}
+
+th {
+  text-align: center;
+  padding: 10px;
+  background: white;
+  position: sticky;
+  top: 0;
+}
+
+tbody tr:hover{
+  background: silver;
+  color: white;
+}
+
+
+tbody td {
+  text-align: center;
+}
+
+.edit, .delete{
+  text-align: center;
+}
+
+.delete a{
+  text-decoration: none;
+}
+
+.delete a:hover{
+  color: red;
+}
+
+#submitButton {
+  margin-top: 10px;
+}
+
+#submitInput{
+  background: rgba(0, 128, 0, 0.5);
+}
+
+#isbn{
+  margin: 0;
+  padding: 0;
+  width: 30px;
+}
+
+
+.success, .error {
+  color: white;
+  padding: 5px;
+  margin: 5px 0 15px o;
+}
+
+.success {
+  background-color: green;
+}
+
+.error {
+  background-color: red;
+}
+
+
+
+@media 
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+/* Force table to not be like tables anymore */
+table, thead, tbody, th, td, tr { 
+  display: block; 
+}
+
+/* Hide table headers (but not display: none;, for accessibility) */
+thead tr { 
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+}
+
+tr { border: 1px solid #ccc; }
+
+td { 
+  /* Behave  like a "row" */
+  border: none;
+  border-bottom: 1px solid #eee; 
+  position: relative;
+  padding-left: 50%; 
+}
+
+td:before { 
+  /* Now like a table header */
+  position: absolute;
+  /* Top/left values mimic padding */
+  top: 6px;
+  left: 6px;
+  width: 45%; 
+  padding-right: 10px; 
+  white-space: nowrap;
+}
+
+}
