@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import routes from './routes/Routes';
 import 'babel-polyfill';
 
 const bodyParser = require('body-parser');
@@ -16,6 +17,8 @@ app.use(express.json());
 app.use('/', express.static('UI'));
 
 app.get('/api/v1', (req, res) => res.status(200).send({ message: 'Welcome to the Quick Credit API' }));
+
+app.use('/api/v1', routes);
 
 const server = app.listen(PORT, () => {
 	console.log(`server running on port ${PORT}`);

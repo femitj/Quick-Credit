@@ -8,8 +8,7 @@
     "start": "nodemon src/server.js --exec babel-node",
     "dev-start": "babel-watch ./src/server.js",
     "build": "babel src -d dist",
-    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
