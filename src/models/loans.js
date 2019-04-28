@@ -10,6 +10,7 @@ const loans = [
     status: "pending", // should default to pending
     balance: 0,
     interest: 5000,
+    createdOn: Date(),
   },
   {
     loanId: 2,
@@ -22,6 +23,7 @@ const loans = [
     status: "pending", // should default to pending
     balance: 0,
     interest: 5000,
+    createdOn: Date(),
   },
 ];
 

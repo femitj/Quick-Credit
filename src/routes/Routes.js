@@ -9,5 +9,6 @@ const router = express.Router();
 router.post('/auth/signup', User.createUser);
 router.post('/auth/signin', User.signin);
 router.post('/loans', Loan.createLoan);
+router.get('/loans', Loan.getAllLoans);
 
 module.exports = router;
