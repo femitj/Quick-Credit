@@ -10,5 +10,6 @@ router.post('/auth/signup', User.createUser);
 router.post('/auth/signin', User.signin);
 router.post('/loans', Loan.createLoan);
 router.get('/loans', Loan.getAllLoans);
+router.get('/loan', Loan.getRepaidLoans);
 
 module.exports = router;
