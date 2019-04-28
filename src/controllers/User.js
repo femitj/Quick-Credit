@@ -10,6 +10,7 @@ class User {
       password: req.body.password, // String
       address: req.body.address, // String
       status: 'unverified',
+      isAdmin: false,
     };
     db.push(user); // User created
     return res.status(201).json({
@@ -22,6 +23,34 @@ class User {
       },
     });
   }
+
+  // Sign in
+  static signin(req, res) {
+    const user = {
+      email: req.body.email,
+      password: req.body.password,
+    };
+    const userF = db.find(check => (check.email === user.email && check.password === user.password));
+    // User not found
+    if (!userF) {
+      return res.status(404).json({
+        status: 404,
+        error: 'User not found',
+      });
+    }
+    // User found
+    return res.status(200).json({
+      status: 200,
+      data: {
+        id: userF.id,
+        firstName: userF.firstname,
+        lastName: userF.lastname,
+        email: userF.email,
+        isAdmin: userF.isAdmin,
+      },
+    });
+  }
 }
+
 
 export default User;
