@@ -3,6 +3,7 @@ import db from '../models/user';
 class User {
   static createUser(req, res) {
     const user = {
+      token: Math.random().toString(36).substr(2) + Math.random().toString(36).substr(2),
       id: db.length + 1,
       email: req.body.email, // String
       firstname: req.body.firstname, // String
@@ -16,6 +17,7 @@ class User {
     return res.status(201).json({
       status: 201,
       data: {
+        token: user.token,
         id: user.id,
         firstName: user.firstname,
         lastName: user.lastname,
@@ -42,6 +44,7 @@ class User {
     return res.status(200).json({
       status: 200,
       data: {
+        token: userF.token,
         id: userF.id,
         firstName: userF.firstname,
         lastName: userF.lastname,
