@@ -17,6 +17,7 @@ class Loan {
       status: 'pending', // should default to pending
       balance: calcAmount,
       interest: calcInterest,
+      createdOn: new Date(),
     };
     db.push(loan); // User created
     return res.status(200).json({
@@ -32,7 +33,17 @@ class Loan {
         status: loan.status, // should default to pending
         balance: loan.balance,
         interest: loan.interest,
+        createdOn: loan.createdOn,
       },
+    });
+  }
+
+  // Get all loans
+  static getAllLoans(req, res) {
+    return res.status(200).json({
+      status: 200,
+      message: 'All loan applicatioin record successfully retrieved',
+      data: db,
     });
   }
 }
