@@ -21,7 +21,7 @@ const loans = [
     tenor: '5 months',
     amount: 100000,
     paymentInstallment: 21000,
-    status: 'pending', // should default to pending
+    status: 'approved', // should default to pending
     repaid: false,
     balance: 0,
     interest: 5000,
@@ -37,7 +37,7 @@ const loans = [
     amount: 100000,
     paymentInstallment: 21000,
     status: 'approved', // should default to pending
-    repaid: true,
+    repaid: false,
     balance: 0,
     interest: 5000,
     firstName: 'bayo',

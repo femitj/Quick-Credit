@@ -61,10 +61,30 @@ class Loan {
         error: 'No loan repaid',
       });
     }
-    // User found
+    // Repaid loans found
     return res.status(200).json({
       status: 200,
       data: foundData,
+    });
+  }
+
+  // Get all current loans
+  static getCurrentLoans(req, res) {
+    const paramsString = req.url.split('?')[1];
+    const eachParamArray = paramsString.split('&');
+    const paramsDetails = Helper.getParams(eachParamArray);
+    const found = db.filter(check => (check.status === paramsDetails.status && String(check.repaid) === paramsDetails.repaid));
+    // Repaid loans not found
+    if (!found) {
+      return res.status(404).json({
+        status: 404,
+        error: 'No loan repaid',
+      });
+    }
+    // Repaid loans found
+    return res.status(200).json({
+      status: 200,
+      data: found,
     });
   }
 }
