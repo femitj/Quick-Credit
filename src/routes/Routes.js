@@ -11,5 +11,6 @@ router.post('/auth/signin', User.signin);
 router.post('/loans', Loan.createLoan);
 router.get('/loans', Loan.getAllLoans);
 router.get('/loan', Loan.getRepaidLoans);
+router.get('/currentloans', Loan.getCurrentLoans);
 
 module.exports = router;
