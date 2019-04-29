@@ -53,9 +53,9 @@ class Loan {
     const paramsString = req.url.split('?')[1];
     const eachParamArray = paramsString.split('&');
     const paramsDetails = Helper.getParams(eachParamArray);
-    const foundData = db.filter(check => (check.status === paramsDetails.status && check.repaid === Boolean(paramsDetails.repaid)));
+    const repaidLoans = db.filter(check => (check.status === paramsDetails.status && check.repaid === Boolean(paramsDetails.repaid)));
     // Repaid loans not found
-    if (!foundData) {
+    if (!repaidLoans) {
       return res.status(404).json({
         status: 404,
         error: 'No loan repaid',
@@ -64,7 +64,7 @@ class Loan {
     // Repaid loans found
     return res.status(200).json({
       status: 200,
-      data: foundData,
+      data: repaidLoans,
     });
   }
 
@@ -73,18 +73,35 @@ class Loan {
     const paramsString = req.url.split('?')[1];
     const eachParamArray = paramsString.split('&');
     const paramsDetails = Helper.getParams(eachParamArray);
-    const found = db.filter(check => (check.status === paramsDetails.status && String(check.repaid) === paramsDetails.repaid));
-    // Repaid loans not found
-    if (!found) {
+    const currentLoans = db.filter(check => (check.status === paramsDetails.status && String(check.repaid) === paramsDetails.repaid));
+    // Current loans not found
+    if (!currentLoans) {
       return res.status(404).json({
         status: 404,
         error: 'No loan repaid',
       });
     }
-    // Repaid loans found
+    // Current loans found
     return res.status(200).json({
       status: 200,
-      data: found,
+      data: currentLoans,
+    });
+  }
+
+  // get a specific loan application
+  static getLoan(req, res) {
+    const loan = db.find(c => c.id === parseInt((req.params.id), 10));
+    // specific loan not found
+    if (!loan) {
+      return res.status(404).json({
+        status: 404,
+        error: 'Political office not found',
+      });
+    }
+    // specific loan found
+    return res.status(200).json({
+      status: 200,
+      data: loan,
     });
   }
 }
