@@ -8,6 +8,9 @@ const router = express.Router();
 // User
 router.post('/auth/signup', User.createUser);
 router.post('/auth/signin', User.signin);
+router.patch('/users/:useremail/verify', User.verifyClient);
+
+// Loans
 router.post('/loans', Loan.createLoan);
 router.get('/loans', Loan.getAllLoans);
 router.get('/loan', Loan.getRepaidLoans);
