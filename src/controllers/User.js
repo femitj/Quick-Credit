@@ -53,6 +53,25 @@ class User {
       },
     });
   }
+
+  // Admin marks client as verify
+  static verifyClient(req, res) {
+    const requestEmail = req.params.useremail;
+    const user = db.find(c => (c.email === requestEmail));
+    // Verify client
+    user.status = 'verified';
+    return res.status(200).json({
+      status: 200,
+      data: {
+        email: user.email,
+        firstName: user.firstname,
+        lastName: user.lastname,
+        password: user.password,
+        address: user.address,
+        status: user.status,
+      },
+    });
+  }
 }
 
 
