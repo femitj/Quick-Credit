@@ -88,20 +88,43 @@ class Loan {
     });
   }
 
-  // get a specific loan application
+  // Get a specific loan application
   static getLoan(req, res) {
     const loan = db.find(c => c.id === parseInt((req.params.id), 10));
     // specific loan not found
     if (!loan) {
       return res.status(404).json({
         status: 404,
-        error: 'Political office not found',
+        error: `loan with id:${req.params.id} not found`,
       });
     }
     // specific loan found
     return res.status(200).json({
       status: 200,
       data: loan,
+    });
+  }
+
+  // Patch a client's loan application
+  static updateLoanStatus(req, res) {
+    // request params for loanid
+    const requestLoanId = req.params.loanid;
+    const newStatus = req.body.status;
+    // search for loan with loan-id
+    const loan = db.find(c => (c.id === parseInt((requestLoanId), 10)));
+    // Update loan status
+    loan.status = newStatus;
+    return res.status(200).json({
+      status: 200,
+      data: {
+        loanId: loan.id,
+        loanAmount: loan.amount,
+        tenor: loan.tenor,
+        status: loan.status,
+        monthlyInstallment: loan.paymentInstallment,
+        interest: loan.interest,
+        user: loan.user,
+      },
     });
   }
 }
