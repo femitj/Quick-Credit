@@ -58,6 +58,12 @@ class User {
   static verifyClient(req, res) {
     const requestEmail = req.params.useremail;
     const user = db.find(c => (c.email === requestEmail));
+    if (!user) {
+      return res.status(404).json({
+        status: 404,
+        error: `user with email:${req.params.useremail} not found`,
+      });
+    }
     // Verify client
     user.status = 'verified';
     return res.status(200).json({
