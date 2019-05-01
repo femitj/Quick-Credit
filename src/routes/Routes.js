@@ -17,5 +17,6 @@ router.get('/loan', Loan.getRepaidLoans);
 router.get('/currentloans', Loan.getCurrentLoans);
 router.get('/loans/:id', Loan.getLoan);
 router.patch('/loans/:loanid', Loan.updateLoanStatus);
+router.post('/loans/:loanid/repayment', Loan.createLoanRepayment);
 
 module.exports = router;
