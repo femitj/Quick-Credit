@@ -1,4 +1,5 @@
 import db from '../models/loans';
+import repaymentdb from '../models/loanRepaymentRecord';
 import Helper from '../helpers/Helper';
 
 class Loan {
@@ -124,6 +125,34 @@ class Loan {
         monthlyInstallment: loan.paymentInstallment,
         interest: loan.interest,
         user: loan.user,
+      },
+    });
+  }
+
+  // Create a loan repayment record
+  static createLoanRepayment(req, res) {
+    // request params for loanid
+    const requestLoanId = req.params.loanid;
+    const loanRepayment = {
+      id: repaymentdb.length + 1,
+      createdOn: new Date(),
+      loanId: requestLoanId,
+      amount: req.body.amount,
+      monthlyInstallment: req.body.monthlyInstallment,
+      paidAmount: req.body.paidAmount,
+      balance: parseFloat(req.body.balance),
+    };
+    repaymentdb.push(loanRepayment);
+    return res.status(201).json({
+      status: 201,
+      data: {
+        id: loanRepayment.id,
+        loanId: loanRepayment.loanId,
+        createdOn: loanRepayment.createdOn,
+        amount: loanRepayment.amount,
+        monthlyInstallment: loanRepayment.monthlyInstallment,
+        paidAmount: loanRepayment.paidAmount,
+        balance: loanRepayment.balance,
       },
     });
   }
