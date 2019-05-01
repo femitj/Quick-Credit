@@ -1,7 +1,7 @@
 const loanRepaymentRecord = [
   {
     id: 1,
-    loanId: 2,
+    loanId: 3,
     createdOn: Date(),
     amount: 100000,
     monthlyInstallment: 21000,
@@ -10,7 +10,7 @@ const loanRepaymentRecord = [
   },
   {
     id: 2,
-    loanId: 2,
+    loanId: 1,
     createdOn: Date(),
     amount: 100000,
     monthlyInstallment: 21000,

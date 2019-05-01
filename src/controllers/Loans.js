@@ -44,7 +44,6 @@ class Loan {
   static getAllLoans(req, res) {
     return res.status(200).json({
       status: 200,
-      message: 'All loan applicatioin record successfully retrieved',
       data: db,
     });
   }
@@ -136,7 +135,7 @@ class Loan {
     const loanRepayment = {
       id: repaymentdb.length + 1,
       createdOn: new Date(),
-      loanId: requestLoanId,
+      loanId: Number(requestLoanId),
       amount: req.body.amount,
       monthlyInstallment: req.body.monthlyInstallment,
       paidAmount: req.body.paidAmount,
@@ -153,6 +152,30 @@ class Loan {
         monthlyInstallment: loanRepayment.monthlyInstallment,
         paidAmount: loanRepayment.paidAmount,
         balance: loanRepayment.balance,
+      },
+    });
+  }
+
+  // Get loan repayment history
+  static getRepaymentHistory(req, res) {
+    const record = repaymentdb.find(c => c.loanId === parseInt((req.params.loanid), 10));
+    //  loan history not found
+    if (!record) {
+      return res.status(404).json({
+        status: 404,
+        error: `loan with id:${req.params.loanid} not found`,
+      });
+    }
+    // loan repayment history found
+    return res.status(200).json({
+      status: 200,
+      data: {
+        loanId: record.loanId,
+        createdOn: record.createdOn,
+        monthlyInstallment: record.monthlyInstallment,
+        amount: record.amount,
+        paidAmount: record.paidAmount,
+        balance: record.balance,
       },
     });
   }
