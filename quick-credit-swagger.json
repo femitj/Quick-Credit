@@ -1,17 +1,49 @@
 {
   "openapi" : "3.0.1",
   "info" : {
-    "title" : "Quick Credit",
+    "title" : "Quick Credit documentation",
     "description" : "Quick Credit is an online lending platform that provides short term soft loans to individuals with the purpose to help solve problems of financial inclusion as a way to alleviate poverty and empower low income earners.",
-    "version" : "0.1"
+    "version" : "0.1",
+    "contact" : {
+      "email" : "tjhakeemus@gmail.com"
+    }
   },
   "servers" : [ {
     "url" : "https://quick-credit.herokuapp.com"
   } ],
+  "tags" : [ {
+    "name" : "Auth",
+    "description" : "Sign up and sign in clients",
+    "externalDocs" : {
+      "url" : "https://quick-credit.herokuapp.com/api/v1"
+    }
+  }, {
+    "name" : "Loans",
+    "description" : "Create, read, update loan applications",
+    "externalDocs" : {
+      "url" : "https://quick-credit.herokuapp.com"
+    }
+  }, {
+    "name" : "Loan repayment record",
+    "description" : "Create and read loan history",
+    "externalDocs" : {
+      "url" : "https://quick-credit.herokuapp.com"
+    }
+  }, {
+    "name" : "Verify",
+    "description" : "verify clients status after confirming clients credentials",
+    "externalDocs" : {
+      "url" : "https://quick-credit.herokuapp.com/api/v1"
+    }
+  } ],
+  "schemes" : [ "https", "http" ],
   "paths" : {
     "/api/v1/auth/signin" : {
       "post" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Auth" ],
+        "summary" : "Sign in user into the app",
+        "description" : "Authenticate a user",
+        "operationId" : "login",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -36,13 +68,23 @@
         },
         "responses" : {
           "200" : {
-            "description" : "Auto generated using Swagger Inspector",
+            "description" : "You have been logged in succesfully!",
             "content" : {
               "application/json; charset=utf-8" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/definitions/SigninSuccess"
                 },
                 "examples" : { }
+              }
+            }
+          },
+          "404" : {
+            "description" : "User not Found",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "$ref" : "#/definitions/BadRequest"
+                }
               }
             }
           }
@@ -57,10 +99,11 @@
     },
     "/api/v1/loans" : {
       "get" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Loans" ],
+        "description" : "Gets all loans transactions",
         "responses" : {
           "200" : {
-            "description" : "Auto generated using Swagger Inspector",
+            "description" : "All loans successfully retrieved",
             "content" : {
               "application/json; charset=utf-8" : {
                 "schema" : {
@@ -76,7 +119,8 @@
         } ]
       },
       "post" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Loans" ],
+        "description" : "Creates loan application",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -131,7 +175,9 @@
     },
     "/api/v1/loans/5/repayment" : {
       "post" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Loan repayment record" ],
+        "summary" : "Creates repayment record",
+        "description" : "Posts a loan repayment record in respect of a client",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -162,7 +208,7 @@
         },
         "responses" : {
           "201" : {
-            "description" : "Auto generated using Swagger Inspector",
+            "description" : "Created loan repayment record successfully",
             "content" : {
               "application/json; charset=utf-8" : {
                 "schema" : {
@@ -183,7 +229,9 @@
     },
     "/api/v1/loan" : {
       "get" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Loans" ],
+        "summary" : "Gets repaid loans",
+        "description" : "Gets all repaid loan transactions",
         "parameters" : [ {
           "name" : "repaid",
           "in" : "query",
@@ -201,7 +249,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Auto generated using Swagger Inspector",
+            "description" : "Successfully gets all repaid record",
             "content" : {
               "application/json; charset=utf-8" : {
                 "schema" : {
@@ -222,7 +270,10 @@
     },
     "/api/v1/auth/signup" : {
       "post" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Auth" ],
+        "summary" : "Create a new client account",
+        "description" : "Registers a new client",
+        "operationId" : "signup",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -256,11 +307,11 @@
         },
         "responses" : {
           "201" : {
-            "description" : "Auto generated using Swagger Inspector",
+            "description" : "Account created successfully",
             "content" : {
               "application/json; charset=utf-8" : {
                 "schema" : {
-                  "type" : "string"
+                  "$ref" : "#/definitions/SignupSuccess"
                 },
                 "examples" : { }
               }
@@ -277,7 +328,8 @@
     },
     "/api/v1/users/seun@gmail.com/verify" : {
       "patch" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Verify" ],
+        "description" : "Updates client's status as verified",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -302,7 +354,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "Auto generated using Swagger Inspector",
+            "description" : "Status successfully updated",
             "content" : {
               "application/json; charset=utf-8" : {
                 "schema" : {
@@ -323,10 +375,12 @@
     },
     "/api/v1/loans/3" : {
       "get" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Loans" ],
+        "summary" : "specific loan",
+        "description" : "Gets a specific loan application",
         "responses" : {
           "200" : {
-            "description" : "Auto generated using Swagger Inspector",
+            "description" : "Successfully gets loan record",
             "content" : {
               "application/json; charset=utf-8" : {
                 "schema" : {
@@ -342,7 +396,9 @@
         } ]
       },
       "patch" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Loans" ],
+        "summary" : "updates loan status",
+        "description" : "Approves loan application",
         "requestBody" : {
           "content" : {
             "application/json" : {
@@ -364,7 +420,7 @@
         },
         "responses" : {
           "200" : {
-            "description" : "Auto generated using Swagger Inspector",
+            "description" : "Successfully updated loan's status",
             "content" : {
               "application/json; charset=utf-8" : {
                 "schema" : {
@@ -385,7 +441,9 @@
     },
     "/api/v1/currentloans" : {
       "get" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Loans" ],
+        "summary" : "Gets current loans",
+        "description" : "Gets all current loan applications",
         "parameters" : [ {
           "name" : "repaid",
           "in" : "query",
@@ -403,7 +461,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "Auto generated using Swagger Inspector",
+            "description" : "Successfully gets current loan record",
             "content" : {
               "application/json; charset=utf-8" : {
                 "schema" : {
@@ -424,10 +482,11 @@
     },
     "/api/v1/loans/5/repayments" : {
       "get" : {
-        "description" : "Auto generated using Swagger Inspector",
+        "tags" : [ "Loan repayment record" ],
+        "description" : "Gets loan repayment history",
         "responses" : {
           "200" : {
-            "description" : "Auto generated using Swagger Inspector",
+            "description" : "Successfuly gets repayment record",
             "content" : {
               "application/json; charset=utf-8" : {
                 "schema" : {
@@ -445,6 +504,107 @@
       "servers" : [ {
         "url" : "https://quick-credit.herokuapp.com"
       } ]
+    }
+  },
+  "definitions" : {
+    "Signup" : {
+      "type" : "object",
+      "properties" : {
+        "firstname" : {
+          "type" : "string"
+        },
+        "lastname" : {
+          "type" : "string"
+        },
+        "username" : {
+          "type" : "string"
+        },
+        "phonenumber" : {
+          "type" : "string"
+        },
+        "othernames" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SignupSuccess" : {
+      "type" : "object",
+      "properties" : {
+        "statusCode" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SignupSuccess"
+          }
+        }
+      }
+    },
+    "Signin" : {
+      "type" : "object",
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SigninSuccess" : {
+      "type" : "object",
+      "properties" : {
+        "statusCode" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "data" : {
+          "items" : {
+            "$ref" : "#/definitions/SigninSuccess"
+          }
+        }
+      }
+    },
+    "BadRequest" : {
+      "type" : "object",
+      "properties" : {
+        "statusCode" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "errors" : {
+          "type" : "string",
+          "items" : {
+            "$ref" : "#/definitions/BadRequest"
+          }
+        }
+      }
+    },
+    "SuccessRequest" : {
+      "type" : "object",
+      "properties" : {
+        "statusCode" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SuccessRequest"
+          }
+        }
+      }
     }
   }
 }
