@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.com/femitj/Quick-Credit.svg?branch=develop)](https://travis-ci.com/femitj/Quick-Credit)
-[![Coverage Status](https://coveralls.io/repos/github/femitj/Quick-Credit/badge.svg?branch=develop)](https://coveralls.io/github/femitj/Quick-Credit?branch=develop)
+[![Coverage Status](https://coveralls.io/repos/github/femitj/Quick-Credit/badge.svg?branch=develop&service=github)](https://coveralls.io/github/femitj/Quick-Credit?branch=develop&service=github)
 [![Maintainability](https://api.codeclimate.com/v1/badges/11dfaa7124ce16a7752b/maintainability)](https://codeclimate.com/github/femitj/Quick-Credit/maintainability)
 
 # Quick-Credit
