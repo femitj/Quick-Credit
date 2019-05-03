@@ -1,0 +1,450 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Quick Credit",
+    "description" : "Quick Credit is an online lending platform that provides short term soft loans to individuals with the purpose to help solve problems of financial inclusion as a way to alleviate poverty and empower low income earners.",
+    "version" : "0.1"
+  },
+  "servers" : [ {
+    "url" : "https://quick-credit.herokuapp.com"
+  } ],
+  "paths" : {
+    "/api/v1/auth/signin" : {
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "email" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"email\": \"tjhakeemus@gmail.com\",\n\t\"password\": \"tijani\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/loans" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "firstname" : {
+                    "type" : "string"
+                  },
+                  "tenor" : {
+                    "type" : "integer"
+                  },
+                  "amount" : {
+                    "type" : "integer"
+                  },
+                  "email" : {
+                    "type" : "string"
+                  },
+                  "lastname" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"email\": \"bola@gmail.com\",\n\t\"firstname\": \"bola\",\n\t\"lastname\": \"tijani\",\n\t\"tenor\": 5,\n\t\"amount\": 100000\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/loans/5/repayment" : {
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "amount" : {
+                    "type" : "string"
+                  },
+                  "monthlyInstallment" : {
+                    "type" : "string"
+                  },
+                  "balance" : {
+                    "type" : "string"
+                  },
+                  "paidAmount" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"amount\": \"100000\",\n\t\"monthlyInstallment\": \"22000\",\n\t\"paidAmount\": \"80000\",\n\t\"balance\": \"70000\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/loan" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "parameters" : [ {
+          "name" : "repaid",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : "true"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "approved"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/auth/signup" : {
+      "post" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "firstname" : {
+                    "type" : "string"
+                  },
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "address" : {
+                    "type" : "string"
+                  },
+                  "email" : {
+                    "type" : "string"
+                  },
+                  "lastname" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"email\": \"bola@gmail.com\",\n\t\"firstname\": \"bola\",\n\t\"lastname\": \"tijani\",\n\t\"password\": \"yankee\",\n\t\"address\": \"311rd, c close house 11 gowon estate\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/users/seun@gmail.com/verify" : {
+      "patch" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "email" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"email\": \"tjhakeemus@gmail.com\",\n\t\"password\": \"tijani\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/loans/3" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "patch" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "status" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"status\": \"approved\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/currentloans" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "parameters" : [ {
+          "name" : "repaid",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : "false"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "approved"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/loans/5/repayments" : {
+      "get" : {
+        "description" : "Auto generated using Swagger Inspector",
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    }
+  }
+}
