@@ -15,7 +15,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // render swagger UI
-app.use('api-docs', swaggerUI.serve, swaggerUI.setup(doc));
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(doc));
 
 app.use(express.json());
 app.use('/', express.static('UI'));
