@@ -1,0 +1,610 @@
+{
+  "openapi" : "3.0.1",
+  "info" : {
+    "title" : "Quick Credit documentation",
+    "description" : "Quick Credit is an online lending platform that provides short term soft loans to individuals with the purpose to help solve problems of financial inclusion as a way to alleviate poverty and empower low income earners.",
+    "version" : "0.1",
+    "contact" : {
+      "email" : "tjhakeemus@gmail.com"
+    }
+  },
+  "servers" : [ {
+    "url" : "https://quick-credit.herokuapp.com"
+  } ],
+  "tags" : [ {
+    "name" : "Auth",
+    "description" : "Sign up and sign in clients",
+    "externalDocs" : {
+      "url" : "https://quick-credit.herokuapp.com/api/v1"
+    }
+  }, {
+    "name" : "Loans",
+    "description" : "Create, read, update loan applications",
+    "externalDocs" : {
+      "url" : "https://quick-credit.herokuapp.com"
+    }
+  }, {
+    "name" : "Loan repayment record",
+    "description" : "Create and read loan history",
+    "externalDocs" : {
+      "url" : "https://quick-credit.herokuapp.com"
+    }
+  }, {
+    "name" : "Verify",
+    "description" : "verify clients status after confirming clients credentials",
+    "externalDocs" : {
+      "url" : "https://quick-credit.herokuapp.com/api/v1"
+    }
+  } ],
+  "schemes" : [ "https", "http" ],
+  "paths" : {
+    "/api/v1/auth/signin" : {
+      "post" : {
+        "tags" : [ "Auth" ],
+        "summary" : "Sign in user into the app",
+        "description" : "Authenticate a user",
+        "operationId" : "login",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "email" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"email\": \"tjhakeemus@gmail.com\",\n\t\"password\": \"tijani\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "You have been logged in succesfully!",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "$ref" : "#/definitions/SigninSuccess"
+                },
+                "examples" : { }
+              }
+            }
+          },
+          "404" : {
+            "description" : "User not Found",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "$ref" : "#/definitions/BadRequest"
+                }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/loans" : {
+      "get" : {
+        "tags" : [ "Loans" ],
+        "description" : "Gets all loans transactions",
+        "responses" : {
+          "200" : {
+            "description" : "All loans successfully retrieved",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "post" : {
+        "tags" : [ "Loans" ],
+        "description" : "Creates loan application",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "firstname" : {
+                    "type" : "string"
+                  },
+                  "tenor" : {
+                    "type" : "integer"
+                  },
+                  "amount" : {
+                    "type" : "integer"
+                  },
+                  "email" : {
+                    "type" : "string"
+                  },
+                  "lastname" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"email\": \"bola@gmail.com\",\n\t\"firstname\": \"bola\",\n\t\"lastname\": \"tijani\",\n\t\"tenor\": 5,\n\t\"amount\": 100000\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Auto generated using Swagger Inspector",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/loans/5/repayment" : {
+      "post" : {
+        "tags" : [ "Loan repayment record" ],
+        "summary" : "Creates repayment record",
+        "description" : "Posts a loan repayment record in respect of a client",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "amount" : {
+                    "type" : "string"
+                  },
+                  "monthlyInstallment" : {
+                    "type" : "string"
+                  },
+                  "balance" : {
+                    "type" : "string"
+                  },
+                  "paidAmount" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"amount\": \"100000\",\n\t\"monthlyInstallment\": \"22000\",\n\t\"paidAmount\": \"80000\",\n\t\"balance\": \"70000\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Created loan repayment record successfully",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/loan" : {
+      "get" : {
+        "tags" : [ "Loans" ],
+        "summary" : "Gets repaid loans",
+        "description" : "Gets all repaid loan transactions",
+        "parameters" : [ {
+          "name" : "repaid",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : "true"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "approved"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully gets all repaid record",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/auth/signup" : {
+      "post" : {
+        "tags" : [ "Auth" ],
+        "summary" : "Create a new client account",
+        "description" : "Registers a new client",
+        "operationId" : "signup",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "firstname" : {
+                    "type" : "string"
+                  },
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "address" : {
+                    "type" : "string"
+                  },
+                  "email" : {
+                    "type" : "string"
+                  },
+                  "lastname" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"email\": \"bola@gmail.com\",\n\t\"firstname\": \"bola\",\n\t\"lastname\": \"tijani\",\n\t\"password\": \"yankee\",\n\t\"address\": \"311rd, c close house 11 gowon estate\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "201" : {
+            "description" : "Account created successfully",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "$ref" : "#/definitions/SignupSuccess"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/users/seun@gmail.com/verify" : {
+      "patch" : {
+        "tags" : [ "Verify" ],
+        "description" : "Updates client's status as verified",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "password" : {
+                    "type" : "string"
+                  },
+                  "email" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n\t\"email\": \"tjhakeemus@gmail.com\",\n\t\"password\": \"tijani\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Status successfully updated",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/loans/3" : {
+      "get" : {
+        "tags" : [ "Loans" ],
+        "summary" : "specific loan",
+        "description" : "Gets a specific loan application",
+        "responses" : {
+          "200" : {
+            "description" : "Successfully gets loan record",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "patch" : {
+        "tags" : [ "Loans" ],
+        "summary" : "updates loan status",
+        "description" : "Approves loan application",
+        "requestBody" : {
+          "content" : {
+            "application/json" : {
+              "schema" : {
+                "type" : "object",
+                "properties" : {
+                  "status" : {
+                    "type" : "string"
+                  }
+                }
+              },
+              "examples" : {
+                "0" : {
+                  "value" : "{\n    \"status\": \"approved\"\n}"
+                }
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "Successfully updated loan's status",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/currentloans" : {
+      "get" : {
+        "tags" : [ "Loans" ],
+        "summary" : "Gets current loans",
+        "description" : "Gets all current loan applications",
+        "parameters" : [ {
+          "name" : "repaid",
+          "in" : "query",
+          "schema" : {
+            "type" : "boolean"
+          },
+          "example" : "false"
+        }, {
+          "name" : "status",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          },
+          "example" : "approved"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "Successfully gets current loan record",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    },
+    "/api/v1/loans/5/repayments" : {
+      "get" : {
+        "tags" : [ "Loan repayment record" ],
+        "description" : "Gets loan repayment history",
+        "responses" : {
+          "200" : {
+            "description" : "Successfuly gets repayment record",
+            "content" : {
+              "application/json; charset=utf-8" : {
+                "schema" : {
+                  "type" : "string"
+                },
+                "examples" : { }
+              }
+            }
+          }
+        },
+        "servers" : [ {
+          "url" : "https://quick-credit.herokuapp.com"
+        } ]
+      },
+      "servers" : [ {
+        "url" : "https://quick-credit.herokuapp.com"
+      } ]
+    }
+  },
+  "definitions" : {
+    "Signup" : {
+      "type" : "object",
+      "properties" : {
+        "firstname" : {
+          "type" : "string"
+        },
+        "lastname" : {
+          "type" : "string"
+        },
+        "username" : {
+          "type" : "string"
+        },
+        "phonenumber" : {
+          "type" : "string"
+        },
+        "othernames" : {
+          "type" : "string"
+        },
+        "email" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SignupSuccess" : {
+      "type" : "object",
+      "properties" : {
+        "statusCode" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SignupSuccess"
+          }
+        }
+      }
+    },
+    "Signin" : {
+      "type" : "object",
+      "properties" : {
+        "email" : {
+          "type" : "string"
+        },
+        "password" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SigninSuccess" : {
+      "type" : "object",
+      "properties" : {
+        "statusCode" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "data" : {
+          "items" : {
+            "$ref" : "#/definitions/SigninSuccess"
+          }
+        }
+      }
+    },
+    "BadRequest" : {
+      "type" : "object",
+      "properties" : {
+        "statusCode" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "errors" : {
+          "type" : "string",
+          "items" : {
+            "$ref" : "#/definitions/BadRequest"
+          }
+        }
+      }
+    },
+    "SuccessRequest" : {
+      "type" : "object",
+      "properties" : {
+        "statusCode" : {
+          "type" : "integer",
+          "format" : "int64"
+        },
+        "message" : {
+          "type" : "string"
+        },
+        "data" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/SuccessRequest"
+          }
+        }
+      }
+    }
+  }
+}
