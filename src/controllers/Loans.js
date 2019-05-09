@@ -7,7 +7,7 @@ class Loan {
   static createLoan(req, res) {
     const calcAmount = parseFloat(req.body.amount);
     const calcInterest = ((5 / 100) * calcAmount);
-    const calcPaymentInstallment = parseFloat((calcAmount + calcInterest) / req.body.tenor);    
+    const calcPaymentInstallment = parseFloat((calcAmount + calcInterest) / req.body.tenor);
     const loan = {
       id: db.length + 1,
       user: req.body.email,
@@ -136,9 +136,9 @@ class Loan {
       id: repaymentdb.length + 1,
       createdOn: new Date(),
       loanId: Number(requestLoanId),
-      amount: req.body.amount,
-      monthlyInstallment: req.body.monthlyInstallment,
-      paidAmount: req.body.paidAmount,
+      amount: parseFloat(req.body.amount),
+      monthlyInstallment: parseFloat(req.body.monthlyInstallment),
+      paidAmount: parseFloat(req.body.paidAmount),
       balance: parseFloat(req.body.balance),
     };
     repaymentdb.push(loanRepayment);
