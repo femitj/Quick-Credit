@@ -9,7 +9,7 @@ const userOne = {
   email: 'bola@gmail.com',
   firstname: 'bola',
   lastname: 'tijani',
-  password: 'tijani',
+  password: 'tijani123',
   address: 'adebola ojomu str, surulere',
 };
 
@@ -46,7 +46,7 @@ describe('POST api/v1/auth/signin', () => {
       .post('/api/v1/auth/signin')
       .send({
         email: 'bola@gmail.com',
-        password: 'tijani',
+        password: 'tijani123',
       })
       .end((err, res) => {
         res.status.should.equal(200);
@@ -66,7 +66,7 @@ describe('Sign in a user with invalid input values', () => {
       .post('/api/v1/auth/signin')
       .send({
         email: 'teji@gmail.com',
-        password: '12344',
+        password: '12344567',
       })
       .end((err, res) => {
         res.status.should.equal(404);
@@ -244,8 +244,6 @@ describe('POST /loans repayment record', () => {
         res.body.should.have.property('data');
         res.body.status.should.be.a('number');
         res.body.status.should.equal(201);
-        res.body.data.amount.should.be.a('string');
-        res.body.data.paidAmount.should.be.a('string');
         done();
       });
   });
