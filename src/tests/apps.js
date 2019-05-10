@@ -40,6 +40,174 @@ describe('POST api/v1/auth/signup', () => {
   });
 });
 
+describe('Sign up a user with invalid email format', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        email: 'bolagmail.com',
+        firstname: 'bola',
+        lastname: 'tijani',
+        password: 'tijani123',
+        address: 'adebola ojomu str, surulere',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('email');
+        done();
+      });
+  });
+});
+
+describe('Sign up a user with invalid name format', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        email: 'bola@gmail.com',
+        firstname: 'bola7',
+        lastname: 'tijani',
+        password: 'tijani123',
+        address: 'adebola ojomu str, surulere',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('firstname');
+        done();
+      });
+  });
+});
+
+describe('Sign up a user with invalid email format', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        email: 'bola@gmail.com',
+        firstname: 'bola',
+        lastname: 'tijani23',
+        password: 'tijani123',
+        address: 'adebola ojomu str, surulere',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('lastname');
+        done();
+      });
+  });
+});
+
+describe('Sign up a user with empty email value', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        email: '',
+        firstname: 'bola',
+        lastname: 'tijani',
+        password: 'tijani123',
+        address: 'adebola ojomu str, surulere',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('email');
+        done();
+      });
+  });
+});
+
+describe('Sign up a user with invalid password format', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        email: 'bola@gmail.com',
+        firstname: 'bola',
+        lastname: 'tijani',
+        password: 'tija',
+        address: 'adebola ojomu str, surulere',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('password');
+        done();
+      });
+  });
+});
+
+describe('Sign up a user with empty password', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        email: 'bola@gmail.com',
+        firstname: 'bola',
+        lastname: 'tijani',
+        password: '',
+        address: 'adebola ojomu str, surulere',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('password');
+        done();
+      });
+  });
+});
+
+describe('Sign up a user with missing name value', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        email: 'bolagmail.com',
+        firstname: 'bola',
+        lastname: '',
+        password: 'tijani123',
+        address: 'adebola ojomu str, surulere',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('names');
+        done();
+      });
+  });
+});
+
+describe('Sign up a user with empty address value', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        email: 'bola@gmail.com',
+        firstname: 'bola',
+        lastname: 'tijani',
+        password: 'tijani123',
+        address: '',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('address');
+        done();
+      });
+  });
+});
+
 describe('POST api/v1/auth/signin', () => {
   it('should successfully log user in if inputs are valid', (done) => {
     chai.request(app)
@@ -73,6 +241,60 @@ describe('Sign in a user with invalid input values', () => {
         res.body.status.should.equal(404);
         res.body.should.be.a('object');
         res.body.error.should.be.a('string');
+        done();
+      });
+  });
+});
+
+describe('Sign in a user with invalid email format', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'tejigmail.com',
+        password: '12344567',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('email');
+        done();
+      });
+  });
+});
+
+describe('Sign in a user with empty email value', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: '',
+        password: '12344567',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('email');
+        done();
+      });
+  });
+});
+
+describe('Sign in a user with invalid password format', () => {
+  it('Should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/auth/signin')
+      .send({
+        email: 'teji@gmail.com',
+        password: '',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.error[0].should.have.property('password');
         done();
       });
   });
@@ -122,6 +344,144 @@ describe('POST loan application', () => {
         res.body.status.should.be.a('number');
         res.body.status.should.equal(200);
         res.body.data.email.should.be.a('string');
+        done();
+      });
+  });
+});
+
+describe('POST loan application with empty name fields', () => {
+  it('should successfully create a loan applivcation if inputs are valid', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans')
+      .send({
+        email: 'bola@gmail.com',
+        firstname: '',
+        lastname: '',
+        tenor: 5,
+        amount: 100000,
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('names');
+        done();
+      });
+  });
+});
+
+describe('POST loan application with empty email fields', () => {
+  it('should successfully create a loan applivcation if inputs are valid', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans')
+      .send({
+        email: '',
+        firstname: 'tijani',
+        lastname: 'femi',
+        tenor: 5,
+        amount: 100000,
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('email');
+        done();
+      });
+  });
+});
+
+describe('POST loan application with empty tenor fields', () => {
+  it('should successfully create a loan applivcation if inputs are valid', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans')
+      .send({
+        email: 'bola@gmail.com',
+        firstname: 'bola',
+        lastname: 'tijani',
+        tenor: '',
+        amount: 100000,
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('tenor');
+        done();
+      });
+  });
+});
+
+describe('POST loan application with invalid tenor fields', () => {
+  it('should successfully create a loan applivcation if inputs are valid', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans')
+      .send({
+        email: 'bola@gmail.com',
+        firstname: 'bola',
+        lastname: 'tijani',
+        tenor: '354',
+        amount: 100000,
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('tenor');
+        done();
+      });
+  });
+});
+
+describe('POST loan application with invalid name fields', () => {
+  it('should successfully create a loan applivcation if inputs are valid', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans')
+      .send({
+        email: 'bola@gmail.com',
+        firstname: 'bola22',
+        lastname: 'tijani',
+        tenor: '6',
+        amount: 100000,
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('firstname');
+        done();
+      });
+  });
+});
+
+describe('POST loan application with invalid name fields', () => {
+  it('should successfully create a loan applivcation if inputs are valid', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans')
+      .send({
+        email: 'bola@gmail.com',
+        firstname: 'bola',
+        lastname: 'tijani21',
+        tenor: '6',
+        amount: 100000,
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('lastname');
         done();
       });
   });
@@ -248,6 +608,122 @@ describe('POST /loans repayment record', () => {
       });
   });
 });
+
+
+describe('POST loan repayment record with invalid amount fields', () => {
+  it('should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans/4/repayment')
+      .send({
+        amount: '',
+        monthlyInstallment: '',
+        paidAmount: '',
+        balance: '',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('inputs');
+        done();
+      });
+  });
+});
+
+describe('POST loan repayment record with invalid monthly installment value', () => {
+  it('should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans/4/repayment')
+      .send({
+        amount: '10000',
+        monthlyInstallment: 'femi22000',
+        paidAmount: '80000',
+        balance: '70000',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('inputs');
+        res.body.error[1].should.have.property('monthlyInstallment');
+        done();
+      });
+  });
+});
+
+describe('POST loan repayment record with invalid amount value', () => {
+  it('should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans/4/repayment')
+      .send({
+        amount: 'a',
+        monthlyInstallment: '22000',
+        paidAmount: '80000',
+        balance: '70000',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('inputs');
+        res.body.error[1].should.have.property('amount');
+        done();
+      });
+  });
+});
+
+describe('POST loan repayment record with invalid paidAmount value', () => {
+  it('should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans/4/repayment')
+      .send({
+        amount: '10000',
+        monthlyInstallment: '22000',
+        paidAmount: 'a',
+        balance: '70000',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('inputs');
+        res.body.error[1].should.have.property('paidAmount');
+        done();
+      });
+  });
+});
+
+describe('POST loan repayment record with invalid balance value', () => {
+  it('should return an error', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans/4/repayment')
+      .send({
+        amount: '10000',
+        monthlyInstallment: '22000',
+        paidAmount: '80000',
+        balance: 'a',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        res.body.error[0].should.have.property('inputs');
+        res.body.error[1].should.have.property('balance');
+        done();
+      });
+  });
+});
+
 
 describe('GET loan repayment history', () => {
   it('should successfully get loan repayment history', (done) => {
