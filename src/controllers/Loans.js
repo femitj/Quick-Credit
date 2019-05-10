@@ -78,7 +78,7 @@ class Loan {
     if (!currentLoans) {
       return res.status(404).json({
         status: 404,
-        error: 'No loan repaid',
+        error: 'All loans repaid',
       });
     }
     // Current loans found

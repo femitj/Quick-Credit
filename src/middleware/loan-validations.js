@@ -24,7 +24,7 @@ const validations = {
 
       if (!(/^[a-z]{2,40}$/i.test(lastname))) {
         verified = false;
-        error.push({ firstname: `${lastname} must be valid: only letters` });
+        error.push({ lastname: `${lastname} must be valid: only letters` });
       }
     }
 
