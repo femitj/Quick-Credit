@@ -48,10 +48,11 @@ header{
 }
 
 .slogan{
-  margin-top: 20%;
+  margin-top: 10%;
+  text-align: center;
   margin-bottom: 8%;
   color: #fff;
-  font-size: 1.5em;
+  font-size: 2.2em;
   font-weight: 600;
 }
 
