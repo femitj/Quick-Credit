@@ -26,7 +26,6 @@ body{
 	font-size: 18px;
 	border: none;
   color: rgb(104, 103, 103);
-  transition: 2s;
 }
 
 .loan-appv-btn button:hover{
