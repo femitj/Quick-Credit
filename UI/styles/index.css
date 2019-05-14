@@ -29,6 +29,15 @@ header{
   box-shadow: none;
 }
 
+
+.nav-link a{
+  color: white;
+}
+
+#header-title a{
+  color: white;
+}
+
 .nav-link a:hover{
   background: #855e42;
   color: white;
@@ -230,6 +239,14 @@ header{
 
 header{
   height: 65vh;
+}
+
+#header-title a{
+  color: #855e42;
+}
+
+.nav-link a{
+  color: rgb(104, 103, 103);
 }
 
 .slogan{
