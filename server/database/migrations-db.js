@@ -1,7 +1,8 @@
 import bcryptjs from 'bcryptjs';
 import userDb from './user-db';
 import loanDb from './loan-db';
-import db from './config-db.';
+import repaymentDb from './repayment-db';
+import db from './config-db';
 import creatTable from './createtable-db';
 
 const password = bcryptjs.hashSync('123456789', 10);
@@ -12,8 +13,10 @@ const migrateData = async () => {
   await db(userDb.createUser('lanre', 'Tijani', 'tjhakeemus@gmail.com', password, 'n0 3 adebola ojomu street', 'verified'));
   await db(userDb.createUser('seun', 'Tijani', 'seun@gmail.com', password, 'n0 3 adebola ojomu street', 'verified'));
   await db(userDb.createUser('bayo', 'Tijani', 'bayo@gmail.com', password, 'n0 3 adebola ojomu street', 'verified'));
-  await db(loanDb.createLoan('seun@gmail.com', '2-1-2018', '5 months', 100000, 21000, 'approved', false, 0, 5000));
-  await db(loanDb.createLoan('bola@gmail.com', '2-1-2018', '5 months', 100000, 21000, 'approved', false, 0, 5000));
+  await db(loanDb.createLoan('seun@gmail.com', '2/1/2018', '5 months', 100000, 21000, 'approved', false, 0, 5000));
+  await db(loanDb.createLoan('bola@gmail.com', '2/1/2018', '5 months', 100000, 21000, 'approved', false, 0, 5000));
+  await db(repaymentDb.createRepayment('1', '5/15/2019', 100000, 21000, 42000, 58000));
+  await db(repaymentDb.createRepayment('2', '5/15/2019', 100000, 21000, 42000, 58000));
 };
 
 creatTable.createAllTables()

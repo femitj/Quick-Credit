@@ -50,7 +50,7 @@ const createAdmin = () => ({
     'admin@gmail.com',
     adminPassword,
     'no 3 Arogundade str',
-    'approved',
+    'verified',
     true,
   ],
 });

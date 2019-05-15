@@ -1,3 +1,9 @@
+import bcryptjs from 'bcryptjs';
+import Helper from '../helpers/Helper';
+import db from '../database/config-db';
+import queries from '../database/queries-db';
+
+
 const { emailPattern } = {
   emailPattern: /^[a-z\d]+@[a-z]+\.(com|co)[a-z]+$/,
 };
@@ -89,6 +95,47 @@ const validations = {
         error,
       });
     }
+
+    return next();
+  },
+
+  async isUserPresent(req, res, next) {
+    const { rows } = await db(queries.checkUser(
+      req.body.email,
+    ));
+
+    if (rows.length) {
+      if (rows[0].email === req.body.email) {
+        return res.status(409).json({
+          status: 409,
+          error: 'That email has already been used',
+        });
+      }
+    }
+
+    return next();
+  },
+
+  async createUser(req, res, next) {
+    const password = bcryptjs.hashSync(req.body.password, 10);
+
+    const userDetails = {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      password,
+      address: req.body.address,
+    };
+
+    const { rows } = await db(queries.createUser(userDetails.firstname, userDetails.lastname, userDetails.email, password, userDetails.address, 'unverified'));
+    delete rows[0].password;
+
+    const token = Helper.generateToken(rows[0].id, rows[0].isAdmin);
+
+    req.data = {
+      token,
+      user: rows[0],
+    };
 
     return next();
   },
