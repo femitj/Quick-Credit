@@ -24,4 +24,15 @@ loans(
   interest INTEGER NOT NULL
 )`;
 
-export default { queryTextUsers, queryTextLoans };
+const queryTextRepayments = `CREATE TABLE IF NOT EXISTS
+repayments(
+  id SERIAL PRIMARY KEY,
+  loanId INTEGER NOT NULL,
+  createdOn VARCHAR(128) NOT NULL,
+  amount INTEGER NOT NULL,
+  monthlyInstallment INTEGER NOT NULL,
+  paidAmount INTEGER NOT NULL,
+  balance INTEGER NOT NULL
+)`;
+
+export default { queryTextUsers, queryTextLoans, queryTextRepayments };
