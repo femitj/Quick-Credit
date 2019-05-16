@@ -25,6 +25,11 @@ const queries = {
     values: [email],
   }),
 
+  updateClientStatus: (status, email) => ({
+    text: 'UPDATE users SET status = $1 WHERE email = $2 RETURNING *',
+    values: [status, email],
+  }),
+
 };
 
 export default queries;

@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken';
 
 const Helper = {
-  generateToken: (id, isAdmin) => {
+  generateToken: (id, isadmin) => {
     const token = jwt.sign({
       id,
-      isAdmin,
+      isadmin,
     },
     process.env.SECRET, { expiresIn: '7d' });
     return token;

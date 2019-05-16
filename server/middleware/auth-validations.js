@@ -1,4 +1,5 @@
 import bcryptjs from 'bcryptjs';
+import jwt from 'jsonwebtoken';
 import Helper from '../helpers/Helper';
 import db from '../database/config-db';
 import queries from '../database/queries-db';
@@ -171,7 +172,49 @@ const validations = {
     return next();
   },
 
-};
+  async verifyAdminToken(req, res, next) {
+    const token = req.headers.authorization;
+    if (!token) {
+      return res.status(403).json({
+        status: 403,
+        error: 'you need access',
+      });
+    }
 
+    try {
+      const decoded = await jwt.verify(token, process.env.SECRET);
+      delete decoded.password;
+      req.user = decoded;
+      if (!req.user.isadmin) {
+        return res.status(403).json({
+          status: 403,
+          error: 'Unauthorized!, Admin only route',
+        });
+      }
+      return next();
+    } catch (error) {
+      return res.status(400).send(error);
+    }
+  },
+
+  async verifyClient(req, res, next) {
+    const requestEmail = req.params.useremail;
+
+    const { rows } = await db(queries.updateClientStatus('verified', requestEmail));
+
+    const {
+      email, firstname, lastname, address, status,
+    } = rows[0];
+
+    req.data = {
+      email,
+      firstname,
+      lastname,
+      address,
+      status,
+    };
+    return next();
+  },
+};
 
 export default validations;
