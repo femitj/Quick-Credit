@@ -5,6 +5,14 @@ const controllers = {
       data: [req.data],
     });
   },
+
+  async loginUser(req, res) {
+    res.status(200).json({
+      status: 200,
+      data: [req.data],
+    });
+  },
+
   async updateUser(req, res) {
     res.status(200).json({
       status: 200,

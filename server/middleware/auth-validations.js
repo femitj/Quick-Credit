@@ -131,18 +131,42 @@ const validations = {
     const { rows } = await db(queries.createUser(userDetails.firstname, userDetails.lastname, userDetails.email, password, userDetails.address, 'unverified'));
     delete rows[0].password;
 
-    const token = Helper.generateToken(rows[0].id, rows[0].isadmin);
-    const {
-      id, email, firstname, lastname, isadmin,
-    } = rows[0];
+    const token = Helper.generateToken(rows[0].id, rows[0].isAdmin);
 
     req.data = {
       token,
-      id,
-      firstname,
-      lastname,
-      email,
-      isadmin,
+      user: rows[0],
+    };
+
+    return next();
+  },
+
+  async checkUser(req, res, next) {
+    const { rows } = await db(queries.loginUser(req.body.email));
+
+
+    if (!rows.length) {
+      return res.status(400).json({
+        status: 400,
+        error: 'invalid details',
+      });
+    }
+
+    const token = Helper.generateToken(rows[0].id, rows[0].isAdmin);
+    const pass = bcryptjs.compareSync(req.body.password, rows[0].password);
+    delete rows[0].password;
+
+
+    if (!pass) {
+      return res.status(400).json({
+        status: 400,
+        error: 'invalid details',
+      });
+    }
+
+    req.data = {
+      token,
+      user: rows[0],
     };
 
     return next();
@@ -191,8 +215,6 @@ const validations = {
     };
     return next();
   },
-
 };
-
 
 export default validations;

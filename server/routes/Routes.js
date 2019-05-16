@@ -6,12 +6,18 @@ import middleware from '../middleware/auth-validations';
 const router = express.Router();
 
 //  Auth routes
-//  register
+//  register users
 router.post('/auth/signup',
   middleware.validateRegister,
   middleware.isUserPresent,
   middleware.createUser,
   controller.registerUser);
+
+// Login users
+router.post('/auth/signin',
+  middleware.validateLogin,
+  middleware.checkUser,
+  controller.loginUser);
 
 router.patch('/users/:useremail/verify',
   middleware.verifyAdminToken,
