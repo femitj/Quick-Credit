@@ -13,4 +13,9 @@ router.post('/auth/signup',
   middleware.createUser,
   controller.registerUser);
 
+router.patch('/users/:useremail/verify',
+  middleware.verifyAdminToken,
+  middleware.verifyClient,
+  controller.updateUser);
+
 module.exports = router;

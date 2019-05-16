@@ -20,6 +20,11 @@ const queries = {
     values: [firstname, lastname, email, password, address, status],
   }),
 
+  updateClientStatus: (status, email) => ({
+    text: 'UPDATE users SET status = $1 WHERE email = $2 RETURNING *',
+    values: [status, email],
+  }),
+
 };
 
 export default queries;
