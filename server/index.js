@@ -2,6 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import swaggerUI from 'swagger-ui-express';
 import routes from './routes/Routes';
+import Loan from './routes/Loan.routes';
 import 'babel-polyfill';
 import doc from '../quick-credit-swagger.json';
 
@@ -23,6 +24,7 @@ app.use('/', express.static('UI'));
 app.get('/api/v1', (req, res) => res.status(200).send({ message: 'Welcome to the Quick Credit API' }));
 
 app.use('/api/v1', routes);
+app.use('/api/v1', Loan);
 
 const server = app.listen(PORT, () => {
 	console.log(`server running on port ${PORT}`);
