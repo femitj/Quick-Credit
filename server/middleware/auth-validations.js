@@ -152,7 +152,7 @@ const validations = {
       });
     }
 
-    const token = Helper.generateToken(rows[0].id, rows[0].isAdmin);
+    const token = Helper.generateToken(rows[0].id, rows[0].isadmin);
     const pass = bcryptjs.compareSync(req.body.password, rows[0].password);
     delete rows[0].password;
 
