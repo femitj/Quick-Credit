@@ -1,8 +1,8 @@
 const queries = {
 
-  checkUser: (email) => ({
+  checkUser: email => ({
     text: 'SELECT * FROM users WHERE email = $1',
-    values: [email], 
+    values: [email],
   }),
 
   createUser: (
@@ -18,6 +18,11 @@ const queries = {
       VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
     // eslint-disable-next-line max-len
     values: [firstname, lastname, email, password, address, status],
+  }),
+
+  loginUser: email => ({
+    text: 'SELECT * FROM users WHERE email = $1',
+    values: [email],
   }),
 
 };
