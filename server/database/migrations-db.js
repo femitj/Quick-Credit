@@ -14,7 +14,8 @@ const migrateData = async () => {
   await db(userDb.createUser('seun', 'Tijani', 'seun@gmail.com', password, 'n0 3 adebola ojomu street', 'verified'));
   await db(userDb.createUser('bayo', 'Tijani', 'bayo@gmail.com', password, 'n0 3 adebola ojomu street', 'verified'));
   await db(loanDb.createLoan('seun@gmail.com', '2/1/2018', '5 months', 100000, 21000, 'approved', false, 0, 5000));
-  await db(loanDb.createLoan('bola@gmail.com', '2/1/2018', '5 months', 100000, 21000, 'approved', false, 0, 5000));
+  await db(loanDb.createLoan('bola@gmail.com', '2/1/2018', '5 months', 100000, 21000, 'approved', true, 0, 5000));
+  await db(loanDb.createLoan('bola@gmail.com', '2/1/2018', '5 months', 100000, 21000, 'approved', true, 0, 5000));
   await db(repaymentDb.createRepayment('1', '5/15/2019', 100000, 21000, 42000, 58000));
   await db(repaymentDb.createRepayment('2', '5/15/2019', 100000, 21000, 42000, 58000));
 };
