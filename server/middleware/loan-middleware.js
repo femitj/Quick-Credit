@@ -36,6 +36,12 @@ const middleware = {
 
     return next();
   },
+
+  async getLoans(req, res, next) {
+    const { rows } = await db(queries.getAllLoans());
+    req.data = rows;
+    next();
+  },
 };
 
 export default middleware;

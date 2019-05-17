@@ -53,6 +53,8 @@ const queries = {
     values: [email, createdOn, tenor, amount, paymentInstallment, status, repaid, balance, interest],
   }),
 
+  getAllLoans: () => 'SELECT * FROM loans',
+
 };
 
 export default queries;

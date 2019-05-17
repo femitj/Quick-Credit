@@ -15,4 +15,9 @@ router.post('/loans',
   middleware.createLoans,
   controller.postLoan);
 
+  router.get('/loans',
+  authMiddleware.verifyAdminToken,
+  middleware.getLoans,
+  controller.getAllLoans);
+
 module.exports = router;
