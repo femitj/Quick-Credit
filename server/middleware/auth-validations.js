@@ -152,7 +152,7 @@ const validations = {
       });
     }
 
-    const token = Helper.generateToken(rows[0].id, rows[0].isadmin);
+    const token = jwt.sign(rows[0], process.env.SECRET, { expiresIn: '1d' });
     const pass = bcryptjs.compareSync(req.body.password, rows[0].password);
     delete rows[0].password;
 
@@ -169,6 +169,25 @@ const validations = {
       user: rows[0],
     };
 
+    return next();
+  },
+
+  async verifyToken(req, res, next) {
+    const token = req.headers.authorization;
+    if (!token) {
+      return res.status(403).json({
+        status: 403,
+        error: 'you need access',
+      });
+    }
+
+    try {
+      const decoded = await jwt.verify(token, process.env.SECRET);
+      delete decoded.password;
+      req.user = decoded;
+    } catch (error) {
+      return res.status(400).send(error);
+    }
     return next();
   },
 

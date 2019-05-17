@@ -30,6 +30,29 @@ const queries = {
     values: [status, email],
   }),
 
+  checkRepaid: email => ({
+    text: 'SELECT * FROM loans WHERE email = $1 and repaid = false',
+    values: [email],
+  }),
+
+  createLoan: (
+    email,
+    createdOn,
+    tenor,
+    amount,
+    paymentInstallment,
+    status,
+    repaid,
+    balance,
+    interest,
+  ) => ({
+    text: `INSERT INTO 
+      loans(email, createdOn, tenor, amount, paymentInstallment, status, repaid, balance, interest) 
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+    // eslint-disable-next-line max-len
+    values: [email, createdOn, tenor, amount, paymentInstallment, status, repaid, balance, interest],
+  }),
+
   getAllLoans: () => 'SELECT * FROM loans',
 
 };
