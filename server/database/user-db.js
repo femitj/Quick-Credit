@@ -2,22 +2,6 @@ import bcryptjs from 'bcryptjs';
 
 const adminPassword = bcryptjs.hashSync('yankee', 10);
 
-const createUsersTable = () => {
-  const text = `CREATE TABLE IF NOT EXISTS
-          users(
-            id SERIAL PRIMARY KEY,
-            firstname VARCHAR(40) NOT NULL,
-            lastname VARCHAR(40) NOT NULL,
-            email VARCHAR(40) UNIQUE NOT NULL,
-            password VARCHAR(100),
-            address VARCHAR(40) NOT NULL,
-            status VARCHAR(40),
-            isadmin BOOLEAN 
-            
-          )`;
-  return text;
-};
-
 const dropUsersTable = () => 'DROP TABLE IF EXISTS users';
 
 const deleteUser = id => ({
@@ -57,7 +41,6 @@ const createAdmin = () => ({
 
 
 export default {
-  createUsersTable,
   dropUsersTable,
   deleteUser,
   createUser,

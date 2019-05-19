@@ -59,7 +59,14 @@ const middleware = {
   async getLoan(req, res, next) {
     const { id } = req.params;
     const { rows } = await db(queries.getSpecificLoan(id));
-    req.data = rows;
+    // specific loan not found
+    if (!rows[0]) {
+      return res.status(404).json({
+        status: 404,
+        error: `loan with id:${req.params.id} not found`,
+      });
+    }
+    req.data = rows[0];
     return next();
   },
 

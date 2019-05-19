@@ -11,7 +11,9 @@
     "buildTables": "babel-node ./server/database/migrations-db.js",
     "dropAllTables": "babel-node ./server/database/droptables-db.js",
     "drop-create": "npm run dropAllTables && npm run buildTables",
-    "drop-create:dev": "cross-env NODE_ENV=dev npm run drop-create"
+    "drop-create:dev": "cross-env NODE_ENV=dev npm run drop-create",
+    "test": "npm run drop-create && mocha --require babel-core/register tests/ || true",
+    "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
     "type": "git",
@@ -24,6 +26,8 @@
   },
   "homepage": "https://github.com/femitj/Quick-Credit#readme",
   "dependencies": {
+    "@babel/core": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
     "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
     "bcrypt": "^3.0.6",
