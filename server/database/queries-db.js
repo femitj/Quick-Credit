@@ -45,15 +45,32 @@ const queries = {
     repaid,
     balance,
     interest,
+    firstname,
+    lastname,
   ) => ({
     text: `INSERT INTO 
-      loans(email, createdOn, tenor, amount, paymentInstallment, status, repaid, balance, interest) 
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+      loans(email, createdOn, tenor, amount, paymentInstallment, status, repaid, balance, interest, firstname, lastname) 
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
     // eslint-disable-next-line max-len
-    values: [email, createdOn, tenor, amount, paymentInstallment, status, repaid, balance, interest],
+    values: [email, createdOn, tenor, amount, paymentInstallment, status, repaid, balance, interest, firstname, lastname],
   }),
 
   getAllLoans: () => 'SELECT * FROM loans',
+
+  getRepaidLoans: status => ({
+    text: 'SELECT * FROM loans WHERE status = $1 and repaid = true',
+    values: [status],
+  }),
+
+  getCurrentLoans: status => ({
+    text: 'SELECT * FROM loans WHERE status = $1 and repaid = false',
+    values: [status],
+  }),
+
+  getSpecificLoan: id => ({
+    text: 'SELECT * FROM loans WHERE id = $1',
+    values: [id],
+  }),
 
 };
 

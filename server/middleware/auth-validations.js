@@ -1,6 +1,5 @@
 import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import Helper from '../helpers/Helper';
 import db from '../database/config-db';
 import queries from '../database/queries-db';
 
@@ -131,7 +130,7 @@ const validations = {
     const { rows } = await db(queries.createUser(userDetails.firstname, userDetails.lastname, userDetails.email, password, userDetails.address, 'unverified'));
     delete rows[0].password;
 
-    const token = Helper.generateToken(rows[0].id, rows[0].isAdmin);
+    const token = jwt.sign(rows[0], process.env.SECRET, { expiresIn: '1d' });
 
     req.data = {
       token,

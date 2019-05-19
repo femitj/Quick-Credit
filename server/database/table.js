@@ -13,7 +13,7 @@ users(
 const queryTextLoans = `CREATE TABLE IF NOT EXISTS
 loans(
   id SERIAL PRIMARY KEY,
-  email VARCHAR(40),
+  email VARCHAR(40) NOT NULL,
   createdOn VARCHAR(128) NOT NULL,
   tenor VARCHAR(40) NOT NULL,
   amount INTEGER NOT NULL,
@@ -21,7 +21,9 @@ loans(
   status VARCHAR(40),
   repaid BOOLEAN,
   balance INTEGER NOT NULL,
-  interest INTEGER NOT NULL
+  interest INTEGER NOT NULL,
+  firstname VARCHAR(40) NOT NULL,
+  lastname VARCHAR(40) NOT NULL
 )`;
 
 const queryTextRepayments = `CREATE TABLE IF NOT EXISTS
