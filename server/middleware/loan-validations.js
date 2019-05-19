@@ -59,7 +59,7 @@ const validations = {
     monthlyInstallment = parseFloat(monthlyInstallment);
     if (!loanid) {
       verified = false;
-      error.push({ id: 'id must be present' });
+      error.push({ loanid: 'loan-id must be present' });
     }
 
     if (loanid) {
