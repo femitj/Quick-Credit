@@ -72,6 +72,21 @@ const queries = {
     values: [id],
   }),
 
+  createRepayment: (
+    loanId,
+    createdOn,
+    amount,
+    monthlyInstallment,
+    paidAmount,
+    balance,
+  ) => ({
+    text: `INSERT INTO 
+      repayments(loanId, createdOn, amount, monthlyInstallment, paidAmount, balance) 
+      VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
+    // eslint-disable-next-line max-len
+    values: [loanId, createdOn, amount, monthlyInstallment, paidAmount, balance],
+  }),
+
 };
 
 export default queries;
