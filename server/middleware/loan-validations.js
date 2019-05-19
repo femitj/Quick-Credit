@@ -49,10 +49,25 @@ const validations = {
       amount, paidAmount, balance, monthlyInstallment,
     } = req.body;
 
+    const {
+      loanid,
+    } = req.params;
+
     balance = parseFloat(balance);
     paidAmount = parseFloat(paidAmount);
     amount = parseFloat(amount);
     monthlyInstallment = parseFloat(monthlyInstallment);
+    if (!loanid) {
+      verified = false;
+      error.push({ id: 'id must be present' });
+    }
+
+    if (loanid) {
+      if (!(/([0-9])$/i.test(loanid))) {
+        verified = false;
+        error.push({ loanid: `${loanid} must be valid number` });
+      }
+    }
 
     if (!amount || !paidAmount || !balance || !monthlyInstallment) {
       verified = false;
@@ -101,13 +116,13 @@ const validations = {
 
     if (!id) {
       verified = false;
-      error.push({ tenor: 'tenor must be present' });
+      error.push({ id: 'id must be present' });
     }
 
     if (id) {
       if (!(/([0-9])$/i.test(id))) {
         verified = false;
-        error.push({ amount: `${id} must be valid number` });
+        error.push({ id: `${id} must be valid number` });
       }
     }
 
