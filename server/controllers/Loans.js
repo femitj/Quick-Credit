@@ -5,7 +5,13 @@ const controllers = {
       data: [req.data],
     });
   },
-  getAllLoans(req, res) {
+  getLoans(req, res) {
+    res.status(200).json({
+      status: 200,
+      data: req.data,
+    });
+  },
+  getLoan(req, res) {
     res.status(200).json({
       status: 200,
       data: req.data,
