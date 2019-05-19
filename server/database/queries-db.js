@@ -87,6 +87,11 @@ const queries = {
     values: [loanId, createdOn, amount, monthlyInstallment, paidAmount, balance],
   }),
 
+  getRepaymentHistory: loanid => ({
+    text: 'SELECT * FROM repayments WHERE loanid = $1',
+    values: [loanid],
+  }),
+
 };
 
 export default queries;

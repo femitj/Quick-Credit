@@ -14,4 +14,9 @@ router.post('/loans/:loanid/repayment',
   middleware.createRepaymentRecord,
   controller.postRepayment);
 
+router.get('/loans/:loanid/repayments',
+  authMiddleware.verifyToken,
+  middleware.getRepayment,
+  controller.getRepayment);
+
 module.exports = router;

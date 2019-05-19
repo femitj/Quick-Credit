@@ -11,6 +11,13 @@ const middleware = {
     return next();
   },
 
+  async getRepayment(req, res, next) {
+    const { loanid } = req.params;
+    const { rows } = await db(queries.getRepaymentHistory(loanid));
+    req.data = rows;
+    return next();
+  },
+
 };
 
 export default middleware;
