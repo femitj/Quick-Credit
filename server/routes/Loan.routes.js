@@ -26,4 +26,9 @@ router.get('/loans/:id',
   middleware.getLoan,
   controller.getLoan);
 
+router.patch('/loans/:id',
+  authMiddleware.verifyAdminToken,
+  middleware.updateStatus,
+  controller.updateLoanStatus);
+
 module.exports = router;
