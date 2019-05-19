@@ -62,6 +62,26 @@ const middleware = {
     req.data = rows;
     return next();
   },
+
+  async updateStatus(req, res, next) {
+    const requestId = req.params.id;
+
+    const { rows } = await db(queries.updateClientLoanStatus(req.body.status, requestId));
+
+    const {
+      tenor, amount, paymentInstallment, status, interest,
+    } = rows[0];
+
+    req.data = {
+      loanId: rows[0].id,
+      loanAmount: amount,
+      tenor,
+      status,
+      monthlyInstallment: paymentInstallment,
+      interest,
+    };
+    return next();
+  },
 };
 
 export default middleware;

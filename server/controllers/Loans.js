@@ -17,6 +17,12 @@ const controllers = {
       data: req.data,
     });
   },
+  updateLoanStatus(req, res) {
+    res.status(200).json({
+      status: 200,
+      data: req.data,
+    });
+  },
 };
 
 export default controllers;

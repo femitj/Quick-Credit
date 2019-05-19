@@ -92,6 +92,11 @@ const queries = {
     values: [loanid],
   }),
 
+  updateClientLoanStatus: (status, id) => ({
+    text: 'UPDATE loans SET status = $1 WHERE id = $2 RETURNING *',
+    values: [status, id],
+  }),
+
 };
 
 export default queries;
