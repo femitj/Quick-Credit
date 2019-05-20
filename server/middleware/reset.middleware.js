@@ -90,7 +90,18 @@ export default {
       html: htmlBody,
     };
     // eslint-disable-next-line consistent-return
-    sgMail.send(msg);
+    sgMail.send(msg, false, (err, result) => {
+      if (result) {
+        return res.status(200).json({
+          status: 200,
+          data: [{
+            message: 'Check your email for password reset link',
+            email: req.body.email,
+            token: req.token,
+          }],
+        });
+      }
+    });
   },
 
   async validateToken(req, res, next) {
