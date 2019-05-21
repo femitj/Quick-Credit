@@ -12,7 +12,7 @@
     "dropAllTables": "babel-node ./server/database/droptables-db.js",
     "drop-create": "npm run dropAllTables && npm run buildTables",
     "drop-create:dev": "cross-env NODE_ENV=dev npm run drop-create",
-    "test": "npm run drop-create && mocha --require babel-core/register tests/ || true",
+    "test": "npm run drop-create && mocha --require babel-core/register server/tests/ || true",
     "coverage": "nyc npm test && nyc report --reporter=text-lcov | coveralls"
   },
   "repository": {
@@ -31,7 +31,6 @@
     "@sendgrid/mail": "^6.4.0",
     "babel-cli": "^6.26.0",
     "babel-polyfill": "^6.26.0",
-    "bcrypt": "^3.0.6",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",

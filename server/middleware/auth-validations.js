@@ -1,4 +1,3 @@
-import bcryptjs from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import db from '../database/config-db';
 import queries from '../database/queries-db';
@@ -116,61 +115,6 @@ const validations = {
     return next();
   },
 
-  async createUser(req, res, next) {
-    const password = bcryptjs.hashSync(req.body.password, 10);
-
-    const userDetails = {
-      firstname: req.body.firstname,
-      lastname: req.body.lastname,
-      email: req.body.email,
-      password,
-      address: req.body.address,
-    };
-
-    const { rows } = await db(queries.createUser(userDetails.firstname, userDetails.lastname, userDetails.email, password, userDetails.address, 'unverified'));
-    delete rows[0].password;
-
-    const token = jwt.sign(rows[0], process.env.SECRET, { expiresIn: '1d' });
-
-    req.data = {
-      token,
-      user: rows[0],
-    };
-
-    return next();
-  },
-
-  async checkUser(req, res, next) {
-    const { rows } = await db(queries.loginUser(req.body.email));
-
-
-    if (!rows.length) {
-      return res.status(400).json({
-        status: 400,
-        error: 'invalid details',
-      });
-    }
-
-    const token = jwt.sign(rows[0], process.env.SECRET, { expiresIn: '1d' });
-    const pass = bcryptjs.compareSync(req.body.password, rows[0].password);
-    delete rows[0].password;
-
-
-    if (!pass) {
-      return res.status(400).json({
-        status: 400,
-        error: 'invalid details',
-      });
-    }
-
-    req.data = {
-      token,
-      user: rows[0],
-    };
-
-    return next();
-  },
-
   async verifyToken(req, res, next) {
     const token = req.headers.authorization;
     if (!token) {
@@ -185,6 +129,12 @@ const validations = {
       delete decoded.password;
       req.user = decoded;
     } catch (error) {
+      if (error.expiredAt) {
+        return res.status(400).json({
+          status: 400,
+          error: 'Authentication failed, token expired',
+        });
+      }
       return res.status(400).send(error);
     }
     return next();
@@ -213,25 +163,6 @@ const validations = {
     } catch (error) {
       return res.status(400).send(error);
     }
-  },
-
-  async verifyClient(req, res, next) {
-    const requestEmail = req.params.useremail;
-
-    const { rows } = await db(queries.updateClientStatus('verified', requestEmail));
-
-    const {
-      email, firstname, lastname, address, status,
-    } = rows[0];
-
-    req.data = {
-      email,
-      firstname,
-      lastname,
-      address,
-      status,
-    };
-    return next();
   },
 };
 

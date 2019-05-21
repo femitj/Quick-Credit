@@ -41,6 +41,35 @@ const validations = {
     return next();
   },
 
+  queryChecker(req, res, next) {
+    let verified = true;
+    const error = [];
+    const { status, repaid } = req.query;
+    
+    if (!repaid && !status) {
+      return next();
+    }
+    if (status) {
+      if (!(status === 'approved') && !(status === 'pending') && !(status === 'rejected')) {
+        verified = false;
+        error.push({ status: 'invalid details' });
+      }
+    }
+    if (repaid) {
+      if (!(repaid === 'true') && !(repaid === 'false')) {
+        verified = false;
+        error.push({ repaid: 'invalid details' });
+      }
+    }
+    if (!verified) {
+      return res.status(400).json({
+        status: 400,
+        error,
+      });
+    }
+    return next();
+  },
+
   loanRepayment(req, res, next) {
     let verified = true;
     const error = [];

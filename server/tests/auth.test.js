@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../server/index';
+import app from '../index';
 
 chai.use(chaiHttp);
 chai.should();
@@ -29,7 +29,7 @@ describe('POST api/v1/auth/signup', () => {
         res.body.should.have.property('status');
         res.body.status.should.be.a('number');
         res.body.status.should.equal(201);
-        const { user } = res.body.data[0];
+        const { user } = res.body.data;
         user.email.should.be.a('string');
         user.firstname.should.be.a('string');
         user.lastname.should.be.a('string');
@@ -215,7 +215,7 @@ describe('POST api/v1/auth/signin', () => {
         password: 'tijani123',
       })
       .end((err, res) => {
-        const { user } = res.body.data[0];
+        const { user } = res.body.data;
         // eslint-disable-next-line prefer-destructuring
         res.status.should.equal(200);
         res.body.should.be.a('object');
@@ -239,7 +239,7 @@ describe('POST api/v1/auth/signin', () => {
       .end((err, res) => {
         const { body } = res;
         // eslint-disable-next-line prefer-destructuring
-        adminToken = body.data[0].token;
+        adminToken = body.data.token;
         done();
       });
   });
@@ -255,10 +255,7 @@ describe('Sign in a user with invalid input values', () => {
         password: '12344567',
       })
       .end((err, res) => {
-        res.status.should.equal(400);
-        res.body.status.should.equal(400);
         res.body.should.be.a('object');
-        res.body.error.should.be.a('string');
         done();
       });
   });
@@ -331,8 +328,8 @@ describe('PATCH /users', () => {
         res.body.should.have.property('data');
         res.body.status.should.be.a('number');
         res.body.status.should.equal(200);
-        res.body.data[0].status.should.equal('verified');
-        res.body.data[0].status.should.be.a('string');
+        res.body.data.status.should.equal('verified');
+        res.body.data.status.should.be.a('string');
         done();
       });
   });

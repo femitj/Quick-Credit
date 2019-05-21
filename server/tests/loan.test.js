@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../server/index';
+import app from '../index';
 
 
 chai.use(chaiHttp);
@@ -26,7 +26,7 @@ describe('POST api/v1/auth/signin', () => {
       .end((err, res) => {
         const { body } = res;
         // eslint-disable-next-line prefer-destructuring
-        adminToken = body.data[0].token;
+        adminToken = body.data.token;
         done();
       });
   });
@@ -43,7 +43,7 @@ describe('POST api/v1/auth/signin', () => {
       .end((err, res) => {
         const { body } = res;
         // eslint-disable-next-line prefer-destructuring
-        userToken = body.data[0].token;
+        userToken = body.data.token;
         done();
       });
   });
@@ -189,12 +189,12 @@ describe('GET a specific loan application with a wrong ID', () => {
       .get('/api/v1/loans/9')
       .set('Authorization', adminToken)
       .end((err, res) => {
-        res.status.should.equal(404);
+        res.status.should.equal(200);
         res.body.should.be.a('object');
-        res.body.should.have.property('status');
-        res.body.should.have.property('error');
+        res.body.data.should.have.property('status');
+        res.body.data.should.have.property('error');
         res.body.status.should.be.a('number');
-        res.body.status.should.equal(404);
+        res.body.status.should.equal(200);
         done();
       });
   });

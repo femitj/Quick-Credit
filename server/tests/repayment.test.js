@@ -1,7 +1,7 @@
 import 'babel-polyfill';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-import app from '../server/index';
+import app from '../index';
 
 chai.use(chaiHttp);
 chai.should();
@@ -25,7 +25,7 @@ describe('POST api/v1/auth/signin', () => {
       .end((err, res) => {
         const { body } = res;
         // eslint-disable-next-line prefer-destructuring
-        adminToken = body.data[0].token;
+        adminToken = body.data.token;
         done();
       });
   });
@@ -42,7 +42,7 @@ describe('POST api/v1/auth/signin', () => {
       .end((err, res) => {
         const { body } = res;
         // eslint-disable-next-line prefer-destructuring
-        userToken = body.data[0].token;
+        userToken = body.data.token;
         done();
       });
   });

@@ -1,7 +1,7 @@
 import express from 'express';
 import controller from '../controllers/User';
 import middleware from '../middleware/auth-validations';
-import passReset from '../middleware/reset.middleware';
+import passReset from '../services/reset.middleware';
 
 // router handler
 const router = express.Router();
@@ -11,19 +11,20 @@ const router = express.Router();
 router.post('/auth/signup',
   middleware.validateRegister,
   middleware.isUserPresent,
-  middleware.createUser,
   controller.registerUser);
 
 // Login users
 router.post('/auth/signin',
   middleware.validateLogin,
-  middleware.checkUser,
   controller.loginUser);
 
 router.patch('/users/:useremail/verify',
   middleware.verifyAdminToken,
-  middleware.verifyClient,
   controller.updateUser);
+
+router.patch('/users/:useremail/upgrade',
+  middleware.verifyAdminToken,
+  controller.ugradeUser);
 
 // reset pass
 router.post('/reset',
