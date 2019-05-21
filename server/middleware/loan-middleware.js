@@ -1,4 +1,5 @@
 import db from '../database/config-db';
+import sgMail from '@sendgrid/mail';
 import queries from '../database/queries-db';
 
 const middleware = {
@@ -76,7 +77,7 @@ const middleware = {
     const { rows } = await db(queries.updateClientLoanStatus(req.body.status, requestId));
 
     const {
-      tenor, amount, paymentInstallment, status, interest,
+      tenor, amount, paymentInstallment, status, interest, email,
     } = rows[0];
 
     req.data = {
@@ -86,7 +87,41 @@ const middleware = {
       status,
       monthlyInstallment: paymentInstallment,
       interest,
+      email,
     };
+    return next();
+  },
+
+  mailer(req, res, next) {
+    const htmlBody = `<!DOCTYPE html>
+      <html>
+
+      <head>
+          <title>Forget Password Email</title>
+      </head>
+
+      <body>
+          <div>
+              <h3>Dear ${req.data.email},</h3>
+              <p>Your loan has been approved</p>
+              <br>
+              <p>Cheers!</p>
+          </div>
+
+      </body>
+
+      </html>`;
+
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+      to: req.data.email,
+      from: 'no-reply@quickcredit.com',
+      subject: 'Quick Credit Pasword Reset',
+      html: htmlBody,
+    };
+    // eslint-disable-next-line consistent-return
+    sgMail.send(msg);
+
     return next();
   },
 };
