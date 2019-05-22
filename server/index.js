@@ -22,7 +22,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(doc));
 app.use(express.json());
 app.use('/', express.static('UI'));
 
-app.get('/api/v1', (req, res) => res.status(200).send({ message: 'Welcome to the Quick Credit API' }));
+app.get('/api/v1', (req, res) => res.status(200).json({ message: 'Welcome to the Quick Credit API' }));
 
 app.use('/api/v1', routes);
 app.use('/api/v1', Loan);

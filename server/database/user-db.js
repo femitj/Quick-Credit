@@ -1,6 +1,10 @@
 import bcryptjs from 'bcryptjs';
+import dotenv from 'dotenv';
 
-const adminPassword = bcryptjs.hashSync('yankee', 10);
+dotenv.config();
+
+const superAdminEmail = process.env.SUPER_ADMIN_EMAIL;
+const superAdminPassword = bcryptjs.hashSync(process.env.SUPER_ADMIN_PASSWORD, 10);
 
 const dropUsersTable = () => 'DROP TABLE IF EXISTS users';
 
@@ -31,8 +35,8 @@ const createAdmin = () => ({
   values: [
     'Femi',
     'Tijani',
-    'admin@gmail.com',
-    adminPassword,
+    superAdminEmail,
+    superAdminPassword,
     'no 3 Arogundade str',
     'verified',
     true,

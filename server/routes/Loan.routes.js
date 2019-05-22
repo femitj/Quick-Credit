@@ -11,24 +11,24 @@ const router = express.Router();
 router.post('/loans',
   authMiddleware.verifyToken,
   middlewareLoans.loans,
+  middleware.checkVerified,
   middleware.checkEligibility,
-  middleware.createLoans,
   controller.postLoan);
 
 router.get('/loans',
   authMiddleware.verifyAdminToken,
-  middleware.getLoans,
+  middlewareLoans.queryChecker,
   controller.getLoans);
 
 router.get('/loans/:id',
   authMiddleware.verifyAdminToken,
   middlewareLoans.validateParams,
-  middleware.getLoan,
   controller.getLoan);
 
 router.patch('/loans/:id',
   authMiddleware.verifyAdminToken,
-  middleware.updateStatus,
+  middleware.selectEmail,
+  middleware.mailer,
   controller.updateLoanStatus);
 
 module.exports = router;

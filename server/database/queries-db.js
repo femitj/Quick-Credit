@@ -37,7 +37,6 @@ const queries = {
 
   createLoan: (
     email,
-    createdOn,
     tenor,
     amount,
     paymentInstallment,
@@ -49,10 +48,10 @@ const queries = {
     lastname,
   ) => ({
     text: `INSERT INTO 
-      loans(email, createdOn, tenor, amount, paymentInstallment, status, repaid, balance, interest, firstname, lastname) 
-      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11) RETURNING *`,
+      loans(email, tenor, amount, paymentInstallment, status, repaid, balance, interest, firstname, lastname) 
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *`,
     // eslint-disable-next-line max-len
-    values: [email, createdOn, tenor, amount, paymentInstallment, status, repaid, balance, interest, firstname, lastname],
+    values: [email, tenor, amount, paymentInstallment, status, repaid, balance, interest, firstname, lastname],
   }),
 
   getAllLoans: () => 'SELECT * FROM loans',
@@ -81,10 +80,10 @@ const queries = {
     balance,
   ) => ({
     text: `INSERT INTO 
-      repayments(loanId, createdOn, amount, monthlyInstallment, paidAmount, balance) 
-      VALUES($1, $2, $3, $4, $5, $6) RETURNING *`,
+      repayments(loanId, amount, monthlyInstallment, paidAmount, balance) 
+      VALUES($1, $2, $3, $4, $5) RETURNING *`,
     // eslint-disable-next-line max-len
-    values: [loanId, createdOn, amount, monthlyInstallment, paidAmount, balance],
+    values: [loanId, amount, monthlyInstallment, paidAmount, balance],
   }),
 
   getRepaymentHistory: loanid => ({
@@ -95,6 +94,31 @@ const queries = {
   updateClientLoanStatus: (status, id) => ({
     text: 'UPDATE loans SET status = $1 WHERE id = $2 RETURNING *',
     values: [status, id],
+  }),
+
+  selectUserEmail: email => ({
+    text: 'SELECT * from users WHERE email = $1',
+    values: [email],
+  }),
+
+  updatePassword: (password, email) => ({
+    text: 'UPDATE users SET password = $1 WHERE email = $2 RETURNING *',
+    values: [password, email],
+  }),
+
+  selectEmailByLoanId: id => ({
+    text: 'SELECT * from loans WHERE id = $1',
+    values: [id],
+  }),
+
+  updateClientIsAdminStatus: (isadmin, email) => ({
+    text: 'UPDATE users SET isadmin = $1 WHERE email = $2 RETURNING *',
+    values: [isadmin, email],
+  }),
+
+  checkVerification: (email, status) => ({
+    text: 'SELECT * FROM users WHERE email = $1 and status = $2',
+    values: [email, status],
   }),
 
 };
