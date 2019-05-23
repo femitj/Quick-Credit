@@ -24,6 +24,11 @@ const validations = {
       error.push({ tenor: 'tenor must be present' });
     }
 
+    if ((amount > 1000000) || (amount < 1000)) {
+      verified = false;
+      error.push({ amount: 'loan amount is between 1000-1000000' });
+    }
+
     if (amount) {
       if (!(/([0-9])$/i.test(amount))) {
         verified = false;
@@ -52,13 +57,13 @@ const validations = {
     if (status) {
       if (!(status === 'approved') && !(status === 'pending') && !(status === 'rejected')) {
         verified = false;
-        error.push({ status: 'invalid details' });
+        error.push({ status: 'invalid parameter' });
       }
     }
     if (repaid) {
       if (!(repaid === 'true') && !(repaid === 'false')) {
         verified = false;
-        error.push({ repaid: 'invalid details' });
+        error.push({ repaid: 'invalid parameter' });
       }
     }
     if (!verified) {
@@ -75,17 +80,14 @@ const validations = {
     const error = [];
 
     let {
-      amount, paidAmount, balance, monthlyInstallment,
+      paidAmount,
     } = req.body;
 
     const {
       loanid,
     } = req.params;
 
-    balance = parseFloat(balance);
     paidAmount = parseFloat(paidAmount);
-    amount = parseFloat(amount);
-    monthlyInstallment = parseFloat(monthlyInstallment);
     if (!loanid) {
       verified = false;
       error.push({ loanid: 'loan-id must be present' });
@@ -98,30 +100,15 @@ const validations = {
       }
     }
 
-    if (!amount || !paidAmount || !balance || !monthlyInstallment) {
+    if (!paidAmount) {
       verified = false;
-      error.push({ inputs: 'all fields must be present' });
+      error.push({ paidAmount: 'Paid amount must be present' });
     }
 
-    if (amount || paidAmount || balance || monthlyInstallment) {
-      if (!(/([0-9])$/i.test(amount))) {
-        verified = false;
-        error.push({ amount: `${amount} must be valid number` });
-      }
-
+    if (paidAmount) {
       if (!(/([0-9])$/i.test(paidAmount))) {
         verified = false;
         error.push({ paidAmount: `${paidAmount} must be valid number` });
-      }
-
-      if (!(/([0-9])$/i.test(balance))) {
-        verified = false;
-        error.push({ balance: `${balance} must be valid number` });
-      }
-
-      if (!(/([0-9])$/i.test(monthlyInstallment))) {
-        verified = false;
-        error.push({ monthlyInstallment: `${monthlyInstallment} must be valid number` });
       }
     }
 
@@ -142,11 +129,6 @@ const validations = {
     const {
       id,
     } = req.params;
-
-    if (!id) {
-      verified = false;
-      error.push({ id: 'id must be present' });
-    }
 
     if (id) {
       if (!(/([0-9])$/i.test(id))) {

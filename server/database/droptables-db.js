@@ -4,9 +4,9 @@ import repaymentDb from './repayment-db';
 import db from './config-db';
 
 const dropAllTables = async () => {
-  await db(userDb.dropUsersTable());
-  await db(loanDb.dropLoansTable());
   await db(repaymentDb.dropRepaymentTable());
+  await db(loanDb.dropLoansTable());
+  await db(userDb.dropUsersTable());
 };
 
 dropAllTables()

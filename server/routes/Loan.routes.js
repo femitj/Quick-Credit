@@ -1,8 +1,8 @@
 import express from 'express';
 import authMiddleware from '../middleware/auth-validations';
 import controller from '../controllers/Loans';
-import middleware from '../middleware/loan-middleware';
-import middlewareLoans from '../middleware/loan-validations';
+import service from '../services/loans';
+import middleware from '../middleware/loan-validations';
 
 // router handler
 const router = express.Router();
@@ -10,25 +10,28 @@ const router = express.Router();
 //  Loans routes
 router.post('/loans',
   authMiddleware.verifyToken,
-  middlewareLoans.loans,
-  middleware.checkVerified,
-  middleware.checkEligibility,
+  middleware.loans,
+  service.checkVerified,
+  service.checkEligibility,
+  service.createLoans,
   controller.postLoan);
 
 router.get('/loans',
   authMiddleware.verifyAdminToken,
-  middlewareLoans.queryChecker,
+  middleware.queryChecker,
+  service.getLoans,
   controller.getLoans);
 
 router.get('/loans/:id',
   authMiddleware.verifyAdminToken,
-  middlewareLoans.validateParams,
+  middleware.validateParams,
+  service.getLoan,
   controller.getLoan);
 
 router.patch('/loans/:id',
   authMiddleware.verifyAdminToken,
-  middleware.selectEmail,
-  middleware.mailer,
+  service.updateStatus,
+  service.mailer,
   controller.updateLoanStatus);
 
 module.exports = router;
