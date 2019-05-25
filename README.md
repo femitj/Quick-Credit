@@ -10,6 +10,7 @@ Quick Credit is an online lending platform that provides short term soft loans t
 <b> View UI template:</b>https://femitj.github.io/Quick-Credit/<br/>
 <b> Test API Endpoint: </b> https://quick-credit.herokuapp.com/api/v1/ <br/>
 <b> Pivotal Tracker: </b> https://www.pivotaltracker.com/n/projects/2326747<br/>
+<b> Api docs: </b> https://quick-credit.herokuapp.com/api-docs</br>
 
 ## Table of content
 
@@ -52,7 +53,7 @@ that makes it compete healthily with other languages. See [here](https://en.wiki
 
 `npm install`
 
-`npm start`
+`npm run dev`
 
 - Open your browser and Navigate to
 
@@ -81,9 +82,9 @@ that makes it compete healthily with other languages. See [here](https://en.wiki
 
 <tr><td>GET</td> <td>api/v1/loans</td> <td>Get all loan applications</td></tr>
 
-<tr><td>GET</td> <td>api/v1/currentloans</td> <td>Get current loan applications</td></tr>
+<tr><td>GET</td> <td>api/v1/loans?status=approved&repaid=false</td> <td>Get current loan applications</td></tr>
 
-<tr><td>GET</td> <td>api/v1/loan</td> <td>Get repaid loan applications</td></tr>
+<tr><td>GET</td> <td>api/v1/loans?status=approved&repaid=true</td> <td>Get repaid loan applications</td></tr>
 
 <tr><td>PATCH</td> <td>api/v1/loans/<:id></td> <td>Get a specific loan application</td></tr>
 
