@@ -72,7 +72,7 @@ export default {
 
       <body>
           <div>
-              <h3>Dear ${req.user.firstname},</h3>
+              <h3>Dear ${req.user.lastname},</h3>
               <p>You requested for a password reset, kindly use this <a href="${linkUrl}">link</a> to reset your password</p>
               <br>
               <p>Cheers!</p>

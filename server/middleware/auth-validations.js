@@ -4,7 +4,7 @@ import queries from '../database/queries-db';
 
 
 const { emailPattern } = {
-  emailPattern: /^[a-z\d]+@[a-z]+\.(com|co)[a-z]+$/,
+  emailPattern: /^[a-z.\d]+@[a-z]+\.(com|co)[a-z]+$/,
 };
 
 const validations = {

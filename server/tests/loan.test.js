@@ -189,16 +189,33 @@ describe('GET a specific loan application with a wrong ID', () => {
       .get('/api/v1/loans/9')
       .set('Authorization', adminToken)
       .end((err, res) => {
-        res.status.should.equal(200);
+        res.status.should.equal(404);
         res.body.should.be.a('object');
-        res.body.data.should.have.property('status');
-        res.body.data.should.have.property('error');
+        res.body.should.have.property('status');
+        res.body.should.have.property('error');
         res.body.status.should.be.a('number');
-        res.body.status.should.equal(200);
+        res.body.status.should.equal(404);
         done();
       });
   });
 });
+
+// describe('GET a specific loan application with a wrong ID', () => {
+//   it('should return an error message', (done) => {
+//     chai.request(app)
+//       .get('/api/v1/loans/9')
+//       .set('Authorization', adminToken)
+//       .end((err, res) => {
+//         res.status.should.equal(404);
+//         res.body.should.be.a('object');
+//         res.body.should.have.property('status');
+//         res.body.should.have.property('error');
+//         res.body.status.should.be.a('number');
+//         res.body.status.should.equal(404);
+//         done();
+//       });
+//   });
+// });
 
 describe('GET a specific loan application with a wrong ID', () => {
   it('should return an error message', (done) => {
@@ -213,6 +230,23 @@ describe('GET a specific loan application with a wrong ID', () => {
         res.body.status.should.be.a('number');
         res.body.error[0].should.have.property('id');
         res.body.status.should.equal(400);
+        done();
+      });
+  });
+});
+
+describe('GET a specific loan application with a wrong ID', () => {
+  it('should return an error message', (done) => {
+    chai.request(app)
+      .get('/api/v1/loans/96')
+      .set('Authorization', adminToken)
+      .end((err, res) => {
+        res.status.should.equal(404);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.should.have.property('error');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(404);
         done();
       });
   });

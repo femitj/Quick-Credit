@@ -36,8 +36,8 @@ describe('POST api/v1/auth/signin', () => {
     chai.request(app)
       .post('/api/v1/auth/signin')
       .send({
-        email: 'bola@gmail.com',
-        password: 'tijani123',
+        email: 'tjhakeemus@gmail.com',
+        password: '123456789',
       })
       .end((err, res) => {
         const { body } = res;
@@ -51,13 +51,10 @@ describe('POST api/v1/auth/signin', () => {
 describe('POST /loans repayment record', () => {
   it('should post loan repayment record in respect of a client', (done) => {
     chai.request(app)
-      .post('/api/v1/loans/3/repayment')
+      .post('/api/v1/loans/1/repayment')
       .set('Authorization', adminToken)
       .send({
-        amount: '100000',
-        monthlyInstallment: '22000',
         paidAmount: '80000',
-        balance: '70000',
       })
       .end((err, res) => {
         res.status.should.equal(201);
@@ -71,6 +68,26 @@ describe('POST /loans repayment record', () => {
   });
 });
 
+describe('POST /loans repayment record with a fully repaid', () => {
+  it('should expect error', (done) => {
+    chai.request(app)
+      .post('/api/v1/loans/2/repayment')
+      .set('Authorization', adminToken)
+      .send({
+        paidAmount: '80000',
+      })
+      .end((err, res) => {
+        res.status.should.equal(400);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.should.have.property('error');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(400);
+        done();
+      });
+  });
+});
+
 
 describe('POST loan repayment record with invalid amount fields', () => {
   it('should return an error', (done) => {
@@ -78,10 +95,7 @@ describe('POST loan repayment record with invalid amount fields', () => {
       .post('/api/v1/loans/2/repayment')
       .set('Authorization', adminToken)
       .send({
-        amount: '',
-        monthlyInstallment: '',
         paidAmount: '',
-        balance: '',
       })
       .end((err, res) => {
         res.status.should.equal(400);
@@ -89,11 +103,32 @@ describe('POST loan repayment record with invalid amount fields', () => {
         res.body.should.have.property('status');
         res.body.status.should.be.a('number');
         res.body.status.should.equal(400);
-        res.body.error[0].should.have.property('inputs');
+        res.body.error[0].should.have.property('paidAmount');
         done();
       });
   });
 });
+
+// describe('POST loan repayment record with no loanid params', () => {
+//   it('should return an error', (done) => {
+//     chai.request(app)
+//       .post('/api/v1/loans//repayment')
+//       .set('Authorization', adminToken)
+//       .send({
+//         paidAmount: '2000',
+//       })
+//       .end((err, res) => {
+//         res.status.should.equal(404);
+//         res.body.should.be.a('object');
+//         res.body.should.have.property('status');
+//         res.body.status.should.be.a('number');
+//         res.body.status.should.equal(404);
+//         res.body.error[0].should.have.property('loanid');
+//         done();
+//       });
+//   });
+// });
+
 
 describe('POST loan repayment record with invalid monthly installment value', () => {
   it('should return an error', (done) => {
@@ -101,10 +136,7 @@ describe('POST loan repayment record with invalid monthly installment value', ()
       .post('/api/v1/loans/2/repayment')
       .set('Authorization', adminToken)
       .send({
-        amount: '10000',
-        monthlyInstallment: 'femi22000',
-        paidAmount: '80000',
-        balance: '70000',
+        paidAmount: 'femi80000',
       })
       .end((err, res) => {
         res.status.should.equal(400);
@@ -112,8 +144,7 @@ describe('POST loan repayment record with invalid monthly installment value', ()
         res.body.should.have.property('status');
         res.body.status.should.be.a('number');
         res.body.status.should.equal(400);
-        res.body.error[0].should.have.property('inputs');
-        res.body.error[1].should.have.property('monthlyInstallment');
+        res.body.error[0].should.have.property('paidAmount');
         done();
       });
   });
@@ -125,10 +156,7 @@ describe('POST loan repayment record with invalid amount value', () => {
       .post('/api/v1/loans/2/repayment')
       .set('Authorization', adminToken)
       .send({
-        amount: 'a',
-        monthlyInstallment: '22000',
-        paidAmount: '80000',
-        balance: '70000',
+        paidAmount: 'a',
       })
       .end((err, res) => {
         res.status.should.equal(400);
@@ -136,8 +164,7 @@ describe('POST loan repayment record with invalid amount value', () => {
         res.body.should.have.property('status');
         res.body.status.should.be.a('number');
         res.body.status.should.equal(400);
-        res.body.error[0].should.have.property('inputs');
-        res.body.error[1].should.have.property('amount');
+        res.body.error[0].should.have.property('paidAmount');
         done();
       });
   });
@@ -149,10 +176,7 @@ describe('POST loan repayment record with invalid paidAmount value', () => {
       .post('/api/v1/loans/4/repayment')
       .set('Authorization', adminToken)
       .send({
-        amount: '10000',
-        monthlyInstallment: '22000',
         paidAmount: 'a',
-        balance: '70000',
       })
       .end((err, res) => {
         res.status.should.equal(400);
@@ -160,36 +184,12 @@ describe('POST loan repayment record with invalid paidAmount value', () => {
         res.body.should.have.property('status');
         res.body.status.should.be.a('number');
         res.body.status.should.equal(400);
-        res.body.error[0].should.have.property('inputs');
-        res.body.error[1].should.have.property('paidAmount');
+        res.body.error[0].should.have.property('paidAmount');
         done();
       });
   });
 });
 
-describe('POST loan repayment record with invalid balance value', () => {
-  it('should return an error', (done) => {
-    chai.request(app)
-      .post('/api/v1/loans/4/repayment')
-      .set('Authorization', adminToken)
-      .send({
-        amount: '10000',
-        monthlyInstallment: '22000',
-        paidAmount: '80000',
-        balance: 'a',
-      })
-      .end((err, res) => {
-        res.status.should.equal(400);
-        res.body.should.be.a('object');
-        res.body.should.have.property('status');
-        res.body.status.should.be.a('number');
-        res.body.status.should.equal(400);
-        res.body.error[0].should.have.property('inputs');
-        res.body.error[1].should.have.property('balance');
-        done();
-      });
-  });
-});
 
 describe('POST loan repayment record with invalid loan-id value', () => {
   it('should return an error message', (done) => {
@@ -197,10 +197,7 @@ describe('POST loan repayment record with invalid loan-id value', () => {
       .post('/api/v1/loans/s4a/repayment')
       .set('Authorization', adminToken)
       .send({
-        amount: '10000',
-        monthlyInstallment: '22000',
         paidAmount: '80000',
-        balance: '1000',
       })
       .end((err, res) => {
         res.status.should.equal(400);
@@ -218,7 +215,7 @@ describe('POST loan repayment record with invalid loan-id value', () => {
 describe('GET loan repayment history', () => {
   it('should successfully get loan repayment history', (done) => {
     chai.request(app)
-      .get('/api/v1/loans/3/repayments')
+      .get('/api/v1/loans/2/repayments')
       .set('Authorization', userToken)
       .end((err, res) => {
         res.status.should.equal(200);
@@ -226,6 +223,23 @@ describe('GET loan repayment history', () => {
         res.body.should.have.property('status');
         res.body.status.should.be.a('number');
         res.body.status.should.equal(200);
+        done();
+      });
+  });
+});
+
+describe('GET loan repayment history thats belongs to another', () => {
+  it('return error', (done) => {
+    chai.request(app)
+      .get('/api/v1/loans/1/repayments')
+      .set('Authorization', userToken)
+      .end((err, res) => {
+        res.status.should.equal(403);
+        res.body.should.be.a('object');
+        res.body.should.have.property('status');
+        res.body.should.have.property('error');
+        res.body.status.should.be.a('number');
+        res.body.status.should.equal(403);
         done();
       });
   });

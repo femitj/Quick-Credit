@@ -23,7 +23,8 @@ loans(
   balance DECIMAL(10,2) NOT NULL,
   interest DECIMAL(10,2) NOT NULL,
   firstname VARCHAR(40) NOT NULL,
-  lastname VARCHAR(40) NOT NULL
+  lastname VARCHAR(40) NOT NULL,
+  FOREIGN KEY(email) REFERENCES users(email) ON DELETE CASCADE
 )`;
 
 const queryTextRepayments = `CREATE TABLE IF NOT EXISTS
@@ -34,7 +35,8 @@ repayments(
   amount DECIMAL(10,2) NOT NULL,
   monthlyInstallment DECIMAL(10,2) NOT NULL,
   paidAmount DECIMAL(10,2) NOT NULL,
-  balance DECIMAL(10,2) NOT NULL
+  balance DECIMAL(10,2) NOT NULL,
+  FOREIGN KEY(loanId) REFERENCES loans(id) ON DELETE CASCADE
 )`;
 
 export default { queryTextUsers, queryTextLoans, queryTextRepayments };

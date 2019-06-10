@@ -3,4 +3,5 @@ node_modules
 .env
 dist
 .nyc_output
-coveragesendgrid.env
+coverage
+sendgrid.env

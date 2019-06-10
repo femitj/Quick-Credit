@@ -25,6 +25,8 @@ const queries = {
     values: [email],
   }),
 
+  getAllUsers: () => 'SELECT * FROM users',
+
   updateClientStatus: (status, email) => ({
     text: 'UPDATE users SET status = $1 WHERE email = $2 RETURNING *',
     values: [status, email],
@@ -73,7 +75,6 @@ const queries = {
 
   createRepayment: (
     loanId,
-    createdOn,
     amount,
     monthlyInstallment,
     paidAmount,
@@ -84,6 +85,21 @@ const queries = {
       VALUES($1, $2, $3, $4, $5) RETURNING *`,
     // eslint-disable-next-line max-len
     values: [loanId, amount, monthlyInstallment, paidAmount, balance],
+  }),
+
+  updateClientLoanBalance: (balance, id) => ({
+    text: 'UPDATE loans SET balance = $1 WHERE id = $2 RETURNING *',
+    values: [balance, id],
+  }),
+
+  updateClientLoanRepaid: (repaid, id) => ({
+    text: 'UPDATE loans SET repaid = $1 WHERE id = $2 RETURNING *',
+    values: [repaid, id],
+  }),
+
+  getLoansWithLoanid: id => ({
+    text: 'SELECT * FROM loans WHERE id = $1',
+    values: [id],
   }),
 
   getRepaymentHistory: loanid => ({
